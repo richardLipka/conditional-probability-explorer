@@ -1,0 +1,64 @@
+{
+  "id": "rare-disease",
+  "art": "virus",
+  "name": {
+    "en": "Rare disease screening",
+    "cs": "Screening vzácného onemocnění"
+  },
+  "description": {
+    "en": "A whole population is screened for a disease that affects about 1 person in 1,000. The test is right 99 % of the time in both directions.",
+    "cs": "Celá populace je testována na onemocnění, které postihuje zhruba 1 člověka z 1000. Test je v obou směrech správný v 99 % případů."
+  },
+  "question": {
+    "en": "Your test came back positive. How likely is it that you really have the disease?",
+    "cs": "Váš test vyšel pozitivně. Jaká je pravděpodobnost, že onemocnění opravdu máte?"
+  },
+  "condition": {
+    "en": "Has the disease",
+    "cs": "Má onemocnění"
+  },
+  "noCondition": {
+    "en": "Healthy",
+    "cs": "Zdravý"
+  },
+  "positiveMeans": {
+    "en": "The laboratory reports a positive result and the patient is called back for further tests.",
+    "cs": "Laboratoř hlásí pozitivní výsledek a pacient je pozván na další vyšetření."
+  },
+  "negativeMeans": {
+    "en": "The patient is told they are clear and sent home.",
+    "cs": "Pacientovi je sděleno, že je v pořádku, a je poslán domů."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Genuinely ill and correctly identified — treatment can start early, which is the whole point of screening.",
+      "cs": "Skutečně nemocný a správně zachycený — léčba může začít včas, což je celý smysl screeningu."
+    },
+    "falsePositive": {
+      "en": "Healthy, but told the result is positive: weeks of worry, more appointments and invasive follow-up tests for nothing.",
+      "cs": "Zdravý člověk s pozitivním výsledkem: týdny obav, další návštěvy a zbytečná invazivní vyšetření."
+    },
+    "trueNegative": {
+      "en": "Healthy and correctly cleared. Almost everybody ends up here — which is exactly why false positives pile up.",
+      "cs": "Zdravý a správně vyloučený. Sem patří téměř všichni — a právě proto se falešně pozitivních nasčítá tolik."
+    },
+    "falseNegative": {
+      "en": "Genuinely ill but sent home reassured. The disease goes untreated until symptoms appear.",
+      "cs": "Skutečně nemocný, ale poslaný domů s ujištěním. Nemoc zůstává neléčená, dokud se neprojeví příznaky."
+    }
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.001,
+    "test1": {
+      "sensitivity": 0.99,
+      "specificity": 0.99
+    },
+    "test2": {
+      "sensitivity": 0.99,
+      "specificity": 0.999
+    },
+    "confirmatory": false,
+    "dependence": 0
+  }
+}

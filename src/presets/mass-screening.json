@@ -1,0 +1,64 @@
+{
+  "id": "mass-screening",
+  "art": "crowd",
+  "name": {
+    "en": "City-wide mass screening",
+    "cs": "Plošný screening celého města"
+  },
+  "description": {
+    "en": "A whole city is screened for a condition that affects 1 person in 2,000, using a test that is good but not excellent. The false positives arrive by the hundred.",
+    "cs": "Celé město je testováno na stav, který postihuje 1 člověka z 2000, testem, který je dobrý, ale ne vynikající. Falešně pozitivních přijdou stovky."
+  },
+  "question": {
+    "en": "You were flagged by the screening programme. How likely is it that you have the condition?",
+    "cs": "Screeningový program vás označil. Jaká je pravděpodobnost, že daný stav máte?"
+  },
+  "condition": {
+    "en": "Has the condition",
+    "cs": "Daný stav má"
+  },
+  "noCondition": {
+    "en": "Does not have it",
+    "cs": "Daný stav nemá"
+  },
+  "positiveMeans": {
+    "en": "A letter arrives asking you to come in for a confirmatory examination.",
+    "cs": "Přijde dopis s výzvou dostavit se na potvrzovací vyšetření."
+  },
+  "negativeMeans": {
+    "en": "Nothing happens — you are not contacted at all.",
+    "cs": "Nestane se nic — nikdo vás nekontaktuje."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Correctly identified in a group where almost nobody is affected.",
+      "cs": "Správně zachycený ve skupině, kde je postižených naprosté minimum."
+    },
+    "falsePositive": {
+      "en": "Healthy, but summoned anyway. At this prevalence they outnumber the real cases many times over, and every one of them costs an appointment.",
+      "cs": "Zdravý, ale přesto pozvaný. Při této prevalenci jich je mnohonásobně víc než skutečných případů a každý stojí jedno vyšetření."
+    },
+    "trueNegative": {
+      "en": "Correctly left alone.",
+      "cs": "Správně ponechaný bez povšimnutí."
+    },
+    "falseNegative": {
+      "en": "Has the condition but the programme never contacts them.",
+      "cs": "Daný stav má, ale program jej nikdy nekontaktuje."
+    }
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.0005,
+    "test1": {
+      "sensitivity": 0.98,
+      "specificity": 0.97
+    },
+    "test2": {
+      "sensitivity": 0.97,
+      "specificity": 0.9995
+    },
+    "confirmatory": true,
+    "dependence": 0
+  }
+}

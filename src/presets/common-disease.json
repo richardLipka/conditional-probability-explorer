@@ -1,0 +1,64 @@
+{
+  "id": "common-disease",
+  "art": "clinic",
+  "name": {
+    "en": "Common disease, same test",
+    "cs": "Časté onemocnění, stejný test"
+  },
+  "description": {
+    "en": "Exactly the same 99 %/99 % test, but now 1 person in 10 is ill. Nothing about the test changed — only the world it is used in.",
+    "cs": "Naprosto stejný test 99 %/99 %, ale nemocný je teď 1 člověk z 10. Na testu se nezměnilo nic — jen svět, ve kterém se používá."
+  },
+  "question": {
+    "en": "Your test came back positive. How likely is it that you really have the disease?",
+    "cs": "Váš test vyšel pozitivně. Jaká je pravděpodobnost, že onemocnění opravdu máte?"
+  },
+  "condition": {
+    "en": "Has the disease",
+    "cs": "Má onemocnění"
+  },
+  "noCondition": {
+    "en": "Healthy",
+    "cs": "Zdravý"
+  },
+  "positiveMeans": {
+    "en": "A positive result here is already strong evidence on its own.",
+    "cs": "Pozitivní výsledek je zde sám o sobě už silným důkazem."
+  },
+  "negativeMeans": {
+    "en": "A negative result is reassuring, but with this many ill people some cases are still missed.",
+    "cs": "Negativní výsledek uklidňuje, ale při tolika nemocných některé případy stále uniknou."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Ill and correctly identified. With a common disease these now outnumber the false alarms.",
+      "cs": "Nemocný a správně zachycený. U častého onemocnění jich je teď víc než falešných poplachů."
+    },
+    "falsePositive": {
+      "en": "Healthy but flagged. Still happens at the same rate as before — there are simply fewer healthy people to draw them from.",
+      "cs": "Zdravý, ale označený. Děje se to stále stejně často — jen je zdravých lidí méně, ze kterých mohou vzniknout."
+    },
+    "trueNegative": {
+      "en": "Healthy and correctly cleared.",
+      "cs": "Zdravý a správně vyloučený."
+    },
+    "falseNegative": {
+      "en": "Ill but missed. With 1,000 ill people in the population, a 99 % sensitive test still misses about 10 of them.",
+      "cs": "Nemocný, ale přehlédnutý. Při 1000 nemocných test se senzitivitou 99 % stále asi 10 z nich mine."
+    }
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.1,
+    "test1": {
+      "sensitivity": 0.99,
+      "specificity": 0.99
+    },
+    "test2": {
+      "sensitivity": 0.99,
+      "specificity": 0.999
+    },
+    "confirmatory": false,
+    "dependence": 0
+  }
+}

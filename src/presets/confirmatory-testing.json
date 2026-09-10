@@ -1,0 +1,68 @@
+{
+  "id": "confirmatory-testing",
+  "art": "lab",
+  "name": {
+    "en": "Confirmatory laboratory test",
+    "cs": "Potvrzovací laboratorní test"
+  },
+  "description": {
+    "en": "The roadside kit screens, and only the drivers it flags are sent for a precise laboratory analysis. Watch what a second, better test does to the answer.",
+    "cs": "Terénní sada provádí screening a na přesnou laboratorní analýzu jdou jen ti, které označí. Sledujte, co s odpovědí udělá druhý, lepší test."
+  },
+  "question": {
+    "en": "Both tests came back positive. How likely is it that the driver really used the substance?",
+    "cs": "Oba testy vyšly pozitivně. Jak je pravděpodobné, že řidič látku skutečně užil?"
+  },
+  "condition": {
+    "en": "Actually used the substance",
+    "cs": "Látku skutečně užil"
+  },
+  "noCondition": {
+    "en": "Did not use it",
+    "cs": "Látku neužil"
+  },
+  "positiveMeans": {
+    "en": "Both the roadside kit and the laboratory report a positive result.",
+    "cs": "Pozitivní výsledek hlásí terénní sada i laboratoř."
+  },
+  "negativeMeans": {
+    "en": "The laboratory overturns the roadside result and the driver is cleared.",
+    "cs": "Laboratoř výsledek od silnice vyvrátí a řidič je očištěn."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Confirmed by both tests. Two independent positives make this very likely to be real.",
+      "cs": "Potvrzeno oběma testy. Dva nezávislé pozitivní výsledky činí tento případ velmi pravděpodobně skutečným."
+    },
+    "falsePositive": {
+      "en": "Wrong twice over. Rare, because the laboratory test almost never produces a false positive of its own.",
+      "cs": "Chyba hned dvakrát. Vzácné, protože laboratorní test sám o sobě falešně pozitivní výsledek téměř nedává."
+    },
+    "trueNegative": {
+      "en": "Cleared — either never flagged at the roadside, or flagged and then cleared by the laboratory.",
+      "cs": "Vyloučený — buď nebyl označen u silnice, nebo byl označen a laboratoř jej pak očistila."
+    },
+    "falseNegative": {
+      "en": "Missed by the chain. Note that a second test can only clear people the first one flagged, so it never recovers cases the roadside kit already missed.",
+      "cs": "Přehlédnutý celým řetězcem. Druhý test může očistit jen ty, které označil první, takže případy uniklé terénní sadě už nezachytí."
+    }
+  },
+  "disclaimer": {
+    "en": "Educational probability model only. This is not legal advice and does not describe the procedure of any particular jurisdiction.",
+    "cs": "Jde pouze o vzdělávací pravděpodobnostní model. Nejde o právní poradenství ani o popis postupu v konkrétní jurisdikci."
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.005,
+    "test1": {
+      "sensitivity": 0.95,
+      "specificity": 0.98
+    },
+    "test2": {
+      "sensitivity": 0.99,
+      "specificity": 0.999
+    },
+    "confirmatory": true,
+    "dependence": 0
+  }
+}

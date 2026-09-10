@@ -1,0 +1,68 @@
+{
+  "id": "airport-ai",
+  "art": "airport",
+  "name": {
+    "en": "Airport AI pattern screening",
+    "cs": "Letištní AI analýza vzorců chování"
+  },
+  "description": {
+    "en": "An AI system watches behaviour and travel patterns of everyone passing through a large airport and flags the passengers whose pattern matches a criminal profile. Around 100,000 people pass through each day; a handful of them are genuinely involved in crime.",
+    "cs": "Systém AI sleduje chování a cestovní vzorce všech, kdo procházejí velkým letištěm, a označí cestující, jejichž vzorec odpovídá kriminálnímu profilu. Denně tudy projde asi 100 000 lidí; hrstka z nich je skutečně zapojena do trestné činnosti."
+  },
+  "question": {
+    "en": "The system flags a passenger. How likely is it that this person is really involved in crime?",
+    "cs": "Systém označí cestujícího. Jak je pravděpodobné, že je tento člověk skutečně zapojen do trestné činnosti?"
+  },
+  "condition": {
+    "en": "Genuinely involved in crime",
+    "cs": "Skutečně zapojen do trestné činnosti"
+  },
+  "noCondition": {
+    "en": "Ordinary traveller",
+    "cs": "Běžný cestující"
+  },
+  "positiveMeans": {
+    "en": "The system raises an alert and the passenger is taken aside for questioning and a search.",
+    "cs": "Systém vyvolá poplach a cestující je odveden k výslechu a prohlídce."
+  },
+  "negativeMeans": {
+    "en": "The passenger walks through without ever knowing they were assessed.",
+    "cs": "Cestující projde, aniž by se kdy dozvěděl, že byl vyhodnocován."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Genuinely involved and correctly flagged. This is the outcome the system is bought for — and at this base rate there are only a handful of them a day.",
+      "cs": "Skutečně zapojený a správně označený. Kvůli tomuto výsledku se systém pořizuje — a při této základní míře jich je jen pár denně."
+    },
+    "falsePositive": {
+      "en": "An ordinary traveller stopped, questioned and searched because a model matched their pattern. Hundreds of these a day, every one of them innocent, and each one experiences it as an accusation.",
+      "cs": "Běžný cestující zastavený, vyslýchaný a prohledaný, protože model našel shodu s jeho vzorcem. Denně jich jsou stovky, každý z nich nevinný, a každý to prožívá jako obvinění."
+    },
+    "trueNegative": {
+      "en": "An ordinary traveller correctly ignored. Practically the whole airport ends up here — which is precisely why even a tiny false-alarm rate produces so many stops.",
+      "cs": "Běžný cestující správně přehlédnutý. Sem patří prakticky celé letiště — a právě proto i nepatrná míra falešných poplachů způsobí tolik zadržení."
+    },
+    "falseNegative": {
+      "en": "Genuinely involved but not flagged. Note that raising the alert rate to catch these would multiply the innocent people stopped.",
+      "cs": "Skutečně zapojený, ale neoznačený. Zvýšení citlivosti kvůli jejich zachycení by znásobilo počet zastavených nevinných."
+    }
+  },
+  "disclaimer": {
+    "en": "An illustrative probability model for teaching. It does not describe any real system, and the numbers are chosen to make the arithmetic clear rather than to represent any deployed technology.",
+    "cs": "Ilustrativní pravděpodobnostní model pro výuku. Nepopisuje žádný skutečný systém a čísla jsou zvolena tak, aby byl výpočet názorný, nikoli aby odpovídala nasazené technologii."
+  },
+  "params": {
+    "populationSize": 100000,
+    "prevalence": 0.0001,
+    "test1": {
+      "sensitivity": 0.95,
+      "specificity": 0.995
+    },
+    "test2": {
+      "sensitivity": 0.9,
+      "specificity": 0.999
+    },
+    "confirmatory": false,
+    "dependence": 0
+  }
+}

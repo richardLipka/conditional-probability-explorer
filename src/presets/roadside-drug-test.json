@@ -1,0 +1,68 @@
+{
+  "id": "roadside-drug-test",
+  "art": "roadside",
+  "name": {
+    "en": "Roadside drug test",
+    "cs": "Silniční test na drogy"
+  },
+  "description": {
+    "en": "Drivers are stopped at random and tested for a prohibited substance with a field kit. Only a small fraction of drivers on the road have actually used it.",
+    "cs": "Řidiči jsou namátkově zastavováni a testováni na zakázanou látku terénní sadou. Jen malá část řidičů na silnici ji skutečně užila."
+  },
+  "question": {
+    "en": "A driver tests positive. How likely is it that the driver really used the substance?",
+    "cs": "Řidiči vyšel test pozitivně. Jak je pravděpodobné, že látku skutečně užil?"
+  },
+  "condition": {
+    "en": "Actually used the substance",
+    "cs": "Látku skutečně užil"
+  },
+  "noCondition": {
+    "en": "Did not use it",
+    "cs": "Látku neužil"
+  },
+  "positiveMeans": {
+    "en": "The field kit shows a positive line at the roadside.",
+    "cs": "Terénní sada ukáže u silnice pozitivní výsledek."
+  },
+  "negativeMeans": {
+    "en": "The driver is waved on and continues the journey.",
+    "cs": "Řidič je propuštěn a pokračuje v jízdě."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Really did use the substance and the kit caught it — the outcome the checks exist for.",
+      "cs": "Látku skutečně užil a sada to zachytila — přesně kvůli tomu kontroly existují."
+    },
+    "falsePositive": {
+      "en": "Did not use anything, but the kit says otherwise. The driver is detained at the roadside on the strength of a wrong reading.",
+      "cs": "Nic neužil, ale sada tvrdí opak. Řidič je zadržen u silnice na základě chybného výsledku."
+    },
+    "trueNegative": {
+      "en": "Sober and correctly cleared — the overwhelming majority of drivers stopped.",
+      "cs": "Střízlivý a správně vyloučený — drtivá většina zastavených řidičů."
+    },
+    "falseNegative": {
+      "en": "Did use the substance but the kit missed it, and the driver keeps driving.",
+      "cs": "Látku užil, ale sada to nezachytila, a řidič jede dál."
+    }
+  },
+  "disclaimer": {
+    "en": "Educational probability model only. This is not legal advice and does not describe the procedure of any particular jurisdiction.",
+    "cs": "Jde pouze o vzdělávací pravděpodobnostní model. Nejde o právní poradenství ani o popis postupu v konkrétní jurisdikci."
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.005,
+    "test1": {
+      "sensitivity": 0.95,
+      "specificity": 0.98
+    },
+    "test2": {
+      "sensitivity": 0.99,
+      "specificity": 0.999
+    },
+    "confirmatory": false,
+    "dependence": 0
+  }
+}

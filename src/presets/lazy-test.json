@@ -1,0 +1,64 @@
+{
+  "id": "lazy-test",
+  "art": "lazy",
+  "name": {
+    "en": "The 99.9 % accurate useless test",
+    "cs": "Zbytečný test s přesností 99,9 %"
+  },
+  "description": {
+    "en": "This test ignores the patient completely and always answers negative. For a disease affecting 1 person in 1,000 it is right 99.9 % of the time — and it has never found a single case. Accuracy alone tells you almost nothing.",
+    "cs": "Tento test pacienta zcela ignoruje a vždy odpoví negativně. U nemoci postihující 1 člověka z 1000 má pravdu v 99,9 % případů — a nikdy nenašel jediný případ. Samotná přesnost neříká skoro nic."
+  },
+  "question": {
+    "en": "This test is 99.9 % accurate. Would you use it?",
+    "cs": "Tento test má přesnost 99,9 %. Použili byste ho?"
+  },
+  "condition": {
+    "en": "Has the disease",
+    "cs": "Má onemocnění"
+  },
+  "noCondition": {
+    "en": "Healthy",
+    "cs": "Zdravý"
+  },
+  "positiveMeans": {
+    "en": "Nothing — this test never returns a positive result.",
+    "cs": "Nic — tento test nikdy nevrátí pozitivní výsledek."
+  },
+  "negativeMeans": {
+    "en": "Nothing was learned. The answer would have been the same without testing anybody.",
+    "cs": "Nic jsme se nedozvěděli. Odpověď by byla stejná, i kdyby se netestoval nikdo."
+  },
+  "outcomes": {
+    "truePositive": {
+      "en": "Never happens. With sensitivity at zero the test finds nobody.",
+      "cs": "Nikdy nenastane. Při nulové senzitivitě test nenajde nikoho."
+    },
+    "falsePositive": {
+      "en": "Never happens either — which is exactly why the accuracy looks so impressive.",
+      "cs": "Také nikdy nenastane — a právě proto vypadá přesnost tak působivě."
+    },
+    "trueNegative": {
+      "en": "Correct, and it took no skill whatsoever. These alone carry the 99.9 % accuracy figure.",
+      "cs": "Správně, a nebylo k tomu potřeba vůbec nic. Právě tyto případy nesou celou přesnost 99,9 %."
+    },
+    "falseNegative": {
+      "en": "Every single real case is missed. Sensitivity is zero, so the test is useless for the one job it was meant to do.",
+      "cs": "Uniknou úplně všechny skutečné případy. Senzitivita je nulová, takže test je pro svůj jediný úkol k ničemu."
+    }
+  },
+  "params": {
+    "populationSize": 10000,
+    "prevalence": 0.001,
+    "test1": {
+      "sensitivity": 0,
+      "specificity": 1
+    },
+    "test2": {
+      "sensitivity": 0.99,
+      "specificity": 0.999
+    },
+    "confirmatory": false,
+    "dependence": 0
+  }
+}
