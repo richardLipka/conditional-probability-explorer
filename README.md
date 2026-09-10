@@ -7,6 +7,7 @@ An interactive, bilingual (English / Čeština) teaching tool for the **base-rat
 
 Everything runs client-side. No backend.
 
+**Live:** https://richardlipka.github.io/conditional-probability-explorer/
 **Repository:** https://github.com/richardLipka/conditional-probability-explorer
 
 ## Running it
@@ -186,6 +187,12 @@ panel into one image.
 Outcomes are distinguished by shape as well as colour (disc + tick, square +
 cross, triangle, diamond), every control is labelled, the canvas has hover
 readouts, and `prefers-reduced-motion` disables the animation.
+
+## Deployment
+
+Every push to `master` runs the test suite and, if it passes, builds and
+publishes to GitHub Pages via `.github/workflows/deploy.yml`. The build sets
+Vite's `base` to the project sub-path; the dev server keeps the root.
 
 ## Licence
 
