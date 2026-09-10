@@ -71,6 +71,14 @@ export default function App() {
         <span aria-hidden="true">·</span>
         <a href="mailto:lipka@fav.zcu.cz">lipka@fav.zcu.cz</a>
         <span aria-hidden="true">·</span>
+        <a
+          href="https://github.com/richardLipka/conditional-probability-explorer"
+          rel="noopener"
+          target="_blank"
+        >
+          GitHub
+        </a>
+        <span aria-hidden="true">·</span>
         <span>{t('footer.license')}</span>
       </p>
       <p className="footer-affiliation">

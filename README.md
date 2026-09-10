@@ -7,6 +7,8 @@ An interactive, bilingual (English / Čeština) teaching tool for the **base-rat
 
 Everything runs client-side. No backend.
 
+**Repository:** https://github.com/richardLipka/conditional-probability-explorer
+
 ## Running it
 
 ```bash
