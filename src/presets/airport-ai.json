@@ -35,16 +35,16 @@
       "cs": "Skutečně zapojený a správně označený. Kvůli tomuto výsledku se systém pořizuje — a při této základní míře jich je jen pár denně."
     },
     "falsePositive": {
-      "en": "An ordinary traveller stopped, questioned and searched because a model matched their pattern. Hundreds of these a day, every one of them innocent, and each one experiences it as an accusation.",
-      "cs": "Běžný cestující zastavený, vyslýchaný a prohledaný, protože model našel shodu s jeho vzorcem. Denně jich jsou stovky, každý z nich nevinný, a každý to prožívá jako obvinění."
+      "en": "An ordinary traveller pulled aside because a model matched their pattern. Hundreds a day, every one of them innocent. Each one experiences it as an accusation.",
+      "cs": "Běžný cestující odvedený stranou, protože model našel shodu s jeho vzorcem. Denně stovky, každý z nich nevinný. Každý to prožívá jako obvinění."
     },
     "trueNegative": {
-      "en": "An ordinary traveller correctly ignored. Practically the whole airport ends up here — which is precisely why even a tiny false-alarm rate produces so many stops.",
-      "cs": "Běžný cestující správně přehlédnutý. Sem patří prakticky celé letiště — a právě proto i nepatrná míra falešných poplachů způsobí tolik zadržení."
+      "en": "An ordinary traveller correctly ignored. Practically the whole airport ends up here, which is why even a tiny false-alarm rate produces so many stops.",
+      "cs": "Běžný cestující správně přehlédnutý. Sem patří prakticky celé letiště, a proto i nepatrná míra falešných poplachů vyrobí tolik zadržení."
     },
     "falseNegative": {
-      "en": "Genuinely involved but not flagged. Note that raising the alert rate to catch these would multiply the innocent people stopped.",
-      "cs": "Skutečně zapojený, ale neoznačený. Zvýšení citlivosti kvůli jejich zachycení by znásobilo počet zastavených nevinných."
+      "en": "Genuinely involved and not flagged. Turning the alert rate up to catch these people would multiply the innocent ones stopped.",
+      "cs": "Skutečně zapojený a neoznačený. Zvýšit citlivost kvůli těmto lidem znamená znásobit počet zastavených nevinných."
     }
   },
   "disclaimer": {

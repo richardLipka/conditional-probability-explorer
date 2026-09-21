@@ -124,6 +124,42 @@ describe('closed form against brute-force enumeration', () => {
   });
 });
 
+describe('published worked examples', () => {
+  /**
+   * Czech secondary-school textbook, Podmíněná pravděpodobnost:
+   * https://publi.cz/books/201/13.html
+   *
+   * "Počáteční stadium rakoviny se vyskytuje u 3 z tisíce lidí. Pouze 5 %
+   * zdravých má tento test pozitivní a pouze 2 % nemocných má výsledek
+   * negativní. Kolik procent z těch, kteří mají výsledek pozitivní, má
+   * rakovinu?" — the book works it out as 0,00294 / 0,05279 = 5,6 %.
+   */
+  it('reproduces the publi.cz cancer-screening example to the last digit', () => {
+    const p = P({
+      prevalence: 0.003,
+      test1: { sensitivity: 0.98, specificity: 0.95 },
+      confirmatory: false,
+    });
+    const m = computeModel(p);
+    expect(m.stage1.tp).toBeCloseTo(0.00294, 12);
+    expect(m.stage1.fp).toBeCloseTo(0.04985, 12);
+    expect(m.stage1.pPositive).toBeCloseTo(0.05279, 12);
+    expect(m.ppv1).toBeCloseTo(0.00294 / 0.05279, 12);
+    expect((m.ppv1 * 100).toFixed(1)).toBe('5.6');
+  });
+
+  it('agrees with the same example run as a simulation', () => {
+    const p = P({
+      prevalence: 0.003,
+      test1: { sensitivity: 0.98, specificity: 0.95 },
+      confirmatory: false,
+      populationSize: 400000,
+    });
+    const { counts } = runSimulation(p, 20260921);
+    expect(Math.abs(counts.tp1 / counts.positive1 - 0.055692)).toBeLessThan(0.005);
+  });
+});
+
 describe('the dependence model', () => {
   it('at ρ = 0 the second test is exactly the one that was configured', () => {
     const p = P({ dependence: 0 });

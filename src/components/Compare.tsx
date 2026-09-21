@@ -5,6 +5,7 @@
 import { useMemo, useState } from 'react';
 import { useI18n } from '../i18n';
 import { OUTCOME_COLORS } from './Art';
+import { Math as Tex, SvgTex } from './Math';
 import { computeModel, expectedCounts, oneInN } from '../lib/probability';
 import type { ModelParams } from '../lib/types';
 import { FlowDiagram } from './FlowDiagram';
@@ -106,16 +107,9 @@ function PpvCurve({ params, a, b }: { params: ModelParams; a: number; b: number 
       <text x={W / 2} y={H - 1} fontSize="10.5" fill="#6b779c" textAnchor="middle">
         {t('compare.axis.prevalence')}
       </text>
-      <text
-        x={-H / 2}
-        y={12}
-        fontSize="10.5"
-        fill="#6b779c"
-        textAnchor="middle"
-        transform="rotate(-90)"
-      >
-        {t('compare.axis.ppv')}
-      </text>
+      <g transform={`rotate(-90 14 ${H / 2})`}>
+        <SvgTex align="middle" x={14} y={H / 2 - 10} size={10.5} tex="P(D \mid +)" />
+      </g>
     </svg>
   );
 }
@@ -170,7 +164,9 @@ export function Compare({ params }: { params: ModelParams }) {
                 >
                   {pct(m.ppv1, 1)}
                 </div>
-                <div className="given">P(D | +)</div>
+                <div className="given">
+                  <Tex tex="P(D \mid +)" />
+                </div>
                 <div className="stat-row">
                   <div className="stat">
                     <span className="k">{t('outcome.truePositive')} / 10 000</span>

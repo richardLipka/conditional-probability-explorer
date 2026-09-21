@@ -45,7 +45,9 @@ result:
 - **A note on reference classes**: `P(D | +) = 9 %` is a statement about
   everybody who tests positive, not about any one person being 9 % ill.
 
-Formulas are typeset with [KaTeX](https://katex.org/).
+Formulas are typeset with [KaTeX](https://katex.org/) and recompute as you move
+the sliders — including the ones inside the probability tree, which live in SVG
+`foreignObject` elements. Czech gets decimal commas inside the maths.
 
 ## When the two tests are not independent
 
@@ -136,6 +138,13 @@ checked against two independent references in `src/lib/verification.test.ts`:
   it across eight parameter regimes including the degenerate ones.
 - **Monte Carlo**: 400,000-person runs of the actual simulation compared against
   the closed form, so the animation and the arithmetic can never drift apart.
+- **A published worked example**: the cancer-screening problem from the Czech
+  secondary-school text at <https://publi.cz/books/201/13.html> (3 in 1,000
+  prevalence, 5 % false alarms, 2 % missed cases) is reproduced digit for digit,
+  0.00294 / 0.05279 = 5.6 %.
+- **Formula escaping**: TeX commands have to survive the JavaScript string layer
+  they are written in. A test walks every formula in the source and fails if a
+  backslash count would silently eat a command.
 
 Every bundled scenario is also checked for internal consistency — counts adding
 up, probabilities in range, no NaN.

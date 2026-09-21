@@ -43,8 +43,8 @@
       "cs": "Vyloučený — buď nebyl označen u silnice, nebo byl označen a laboratoř jej pak očistila."
     },
     "falseNegative": {
-      "en": "Missed by the chain. Note that a second test can only clear people the first one flagged, so it never recovers cases the roadside kit already missed.",
-      "cs": "Přehlédnutý celým řetězcem. Druhý test může očistit jen ty, které označil první, takže případy uniklé terénní sadě už nezachytí."
+      "en": "Missed by the chain. A second test can only clear people the first one flagged, so it never recovers a case the roadside kit already let through.",
+      "cs": "Přehlédnutý celým řetězcem. Druhý test může očistit jen ty, které označil první, takže případ propuštěný terénní sadou už nezachytí."
     }
   },
   "disclaimer": {

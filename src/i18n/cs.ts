@@ -17,12 +17,11 @@ export const cs: Record<keyof typeof en, string> = {
   'nav.simulation': 'Simulace',
   'nav.theory': 'Teorie',
   'nav.compare': 'Porovnání prevalence',
-  'nav.simulation.desc': 'Sledujte, jak skutečná náhodně vygenerovaná populace prochází testy',
+  'nav.simulation.desc': 'Sledujte, jak náhodně vylosovaná populace prochází testy',
   'nav.theory.desc': 'Tentýž výsledek odvozený přes přirozené četnosti a Bayesovu větu',
-  'nav.compare.desc': 'Stejný test, dvě populace, dva zcela odlišné významy',
+  'nav.compare.desc': 'Jeden test, dvě populace. Pozitivní výsledek v každé znamená něco jiného',
 
   'scenario.label': 'Scénář',
-  'scenario.about': 'O tomto scénáři',
   'scenario.share': 'Kopírovat odkaz ke sdílení',
   'scenario.shared': 'Odkaz zkopírován',
   'scenario.positiveMeans': 'Pozitivní výsledek znamená',
@@ -33,19 +32,17 @@ export const cs: Record<keyof typeof en, string> = {
   'controls.population': 'Velikost populace',
   'controls.population.custom': 'Vlastní',
   'controls.prevalence': 'Prevalence (četnost výskytu)',
-  'controls.prevalence.hint': 'Jak častý je jev v testované populaci — základní míra výskytu',
+  'controls.prevalence.hint': 'Jak častý je jev mezi testovanými. Základní míra výskytu.',
   'controls.test1': 'Test 1',
   'controls.test2': 'Test 2 (potvrzovací)',
   'controls.test2.note':
-    'Tyto hodnoty stále řídí záložku Teorie. Zapněte potvrzovací testování, aby se použily i v simulaci.',
+    'Záložka Teorie je používá tak jako tak. Zapněte potvrzovací testování a projeví se i v simulaci.',
   'controls.sensitivity': 'Senzitivita',
-  'controls.sensitivity.hint': 'P(pozitivní | jev nastal) — jak dobře test nachází skutečné případy',
+  'controls.sensitivity.hint': 'Jak často test zachytí skutečný případ.',
   'controls.specificity': 'Specificita',
-  'controls.specificity.hint': 'P(negativní | jev nenastal) — jak spolehlivě test propustí zdravé',
+  'controls.specificity.hint': 'Jak často propustí toho, komu nic není.',
   'controls.confirmatory': 'Potvrzovací druhý test',
   'controls.confirmatory.hint': 'Znovu otestovat pouze ty, kdo byli pozitivní v testu 1',
-  'controls.mode.single': 'Jeden test',
-  'controls.mode.confirm': 'Potvrzovací testování',
   'controls.preset.export': 'Exportovat JSON',
   'controls.preset.import': 'Importovat JSON',
   'controls.reset': 'Obnovit přednastavení',
@@ -54,7 +51,7 @@ export const cs: Record<keyof typeof en, string> = {
   'controls.seed.fixed': 'Pevné',
   'controls.seed.reroll': 'Vylosovat nové semínko',
   'controls.seed.hint.auto': 'Každý běh vylosuje novou náhodnou populaci.',
-  'controls.seed.hint.fixed': 'Toto semínko zopakuje přesně stejný běh. Úprava čísla jej zafixuje.',
+  'controls.seed.hint.fixed': 'Stejné semínko, stejný běh, pokaždé. Vepsáním čísla jej zafixujete.',
   'controls.oneIn': '1 z {n} lidí',
 
   'sim.run': 'Spustit simulaci',
@@ -65,7 +62,7 @@ export const cs: Record<keyof typeof en, string> = {
   'sim.mode.random': 'Náhodná simulace',
   'sim.mode.expected': 'Očekávané hodnoty',
   'sim.mode.hint':
-    'Náhodné výběry kolísají; očekávané hodnoty jsou to, co pravděpodobnost předpovídá v průměru.',
+    'Náhodné výběry kolísají. Očekávané hodnoty jsou dlouhodobý průměr.',
   'sim.stage.idle': 'Připraveno — stiskněte Spustit simulaci',
   'sim.stage.population': 'Generuji populaci',
   'sim.stage.condition': 'Přiřazuji skutečný stav podle prevalence',
@@ -73,21 +70,17 @@ export const cs: Record<keyof typeof en, string> = {
   'sim.stage.split1': 'Rozděluji pozitivní a negativní výsledky',
   'sim.stage.test2': 'Přetestovávám pouze pozitivní',
   'sim.stage.done': 'Hotovo — všichni jsou roztříděni',
-  'sim.legend': 'Legenda',
   'sim.focus': 'Podmínit pozitivním výsledkem',
   'sim.focus.off': 'Zobrazit zase celou populaci',
   'sim.focus.title': 'Pozitivní v testu 1 — {n} lidí, nyní celá populace',
   'sim.focus.caption':
-    'Nyní víme, že test řekl pozitivní. Všichni ostatní z obrázku zmizeli: těchto {n} lidí je celá populace a {ppv} z nich jev skutečně má. Právě toto přeškálování znamená podmiňování.',
+    'Test řekl pozitivní. Všichni ostatní z obrázku zmizeli. Těchto {n} lidí je teď celá populace a {ppv} z nich jev má. Tomuto přeškálování se říká podmiňování.',
   'stream.detail': 'Uvnitř proudu pozitivních',
   'stream.magnified': 'zvětšeno {k}×',
-  'stream.trueScale': 'Šířky odpovídají počtu lidí; proudy tenčí než pixel jsou vykresleny jako vlasové linky.',
+  'stream.trueScale': 'Šířka je počet lidí. Vlasová linka je proud tenčí než jeden pixel.',
   'stream.notRetested': 'znovu netestováni',
   'sim.finalResult': 'Kde všichni skončili',
   'sim.finalResult.hint': 'Ustálený běh jako jeden proporcionální tok',
-  'sim.person': 'osoba',
-  'sim.people': 'lidí',
-  'sim.tooltip.of': 'z',
   'sim.sampling':
     'Zobrazen náhodný vzorek {shown} z {total} jedinců — počty níže platí pro celou populaci.',
 
@@ -101,7 +94,6 @@ export const cs: Record<keyof typeof en, string> = {
   'outcome.falseNegative.desc': 'Jev nastal, ale test jej přehlédl',
   'outcome.hasCondition': 'Jev nastal',
   'outcome.noCondition': 'Jev nenastal',
-  'outcome.notTested': 'Znovu netestován',
 
   'flow.population': 'Celá populace',
   'flow.test1': 'Test 1',
@@ -152,11 +144,11 @@ export const cs: Record<keyof typeof en, string> = {
   'neg.ledger.missed2': '{n} zachytil test 1 a poté je test 2 vyloučil',
   'neg.ledger.cost': 'To je cena za potvrzování.',
   'neg.chain': 'Senzitivita řetězce',
-  'neg.chain.hint': 'se₁ × se₂ — podíl skutečných případů, které projdou oběma testy',
+  'neg.chain.hint': 'Podíl skutečných případů, které projdou oběma testy',
   'dash.accuracy': 'Celková přesnost',
   'dash.accuracy.hint': 'Jak často test odpoví správně u kohokoli',
   'dash.accuracy.trap':
-    'Přesnost vypadá vysoká proto, že daný jev nemá skoro nikdo a test to správně říká. Nese ji počet správně negativních a o významu pozitivního výsledku neříká téměř nic.',
+    'Přesnost je vysoká proto, že jev nemá skoro nikdo a test to správně říká. Celé číslo nesou správně negativní. O ceně pozitivního výsledku neříká nic.',
   'dash.negative.stage': 'Po negativním výsledku',
   'dash.negative.headline': 'Pravděpodobnost, že jev nenastal',
   'dash.negative.given': 'při jednom negativním výsledku',
@@ -166,10 +158,10 @@ export const cs: Record<keyof typeof en, string> = {
   'dash.negative.oneIn': 'Zhruba 1 přehlédnutý případ na každých {n} negativních výsledků.',
   'dash.negative.perfect': 'Při tomto nastavení není negativní výsledek nikdy chybný.',
   'dash.negative.insight':
-    'Když je jev vzácný, je právě negativní výsledek ten důvěryhodný: skoro každý, komu vyjde negativně, jev opravdu nemá. Opatrnost si žádá výsledek pozitivní.',
+    'Když je jev vzácný, důvěryhodný je právě negativní výsledek. Skoro každý, komu vyjde negativně, jev opravdu nemá. Opatrnost si žádají pozitivní výsledky.',
   'dash.negative.insightCommon':
     'Jev je natolik častý, že u negativního výsledku zůstává reálná šance na přehlédnutý případ.',
-  'dash.neverPositive': 'Tento test nikdy nevrátí pozitivní výsledek, takže není co vykládat.',
+  'dash.neverPositive': 'Tento test nikdy neřekne pozitivní. Není co vykládat.',
   'export.image': 'Stáhnout obrázek',
   'export.saving': 'Ukládám…',
   'export.simulation': 'Průběh simulace',
@@ -180,36 +172,37 @@ export const cs: Record<keyof typeof en, string> = {
   'export.params.second': ' · test 2 senzitivita {se2} / specificita {sp2}',
   'export.credit': 'Průzkumník podmíněné pravděpodobnosti',
   'dash.insight.rare':
-    'Jev je vzácný, takže většina pozitivních výsledků pochází z obrovské skupiny zdravých. Odpověď zde limituje specificita, nikoli senzitivita.',
+    'Jev je vzácný. Většina pozitivních výsledků vzejde z obrovské skupiny zdravých, takže strop odpovědi určuje specificita. Senzitivita s ní skoro nehne.',
   'dash.insight.common':
     'Jev je natolik častý, že pozitivní výsledek je sám o sobě už silným důkazem.',
   'dash.insight.confirm':
-    'Druhý, nezávislý pozitivní výsledek šanci znovu vynásobí — proto je potvrzovací testování u vzácných jevů tak důležité.',
+    'Druhý nezávislý pozitivní výsledek šanci znovu vynásobí. Proto u vzácných jevů nikdo nejedná podle jediného pozitivního testu.',
 
   'theory.title': 'Odkud se to číslo bere',
   'theory.table.howto': 'Klikněte na řádek nebo sloupec a podmiňte jím. Vybraná skupina se stane celou populací.',
   'theory.table.hint': 'Teď je každá buňka podílem ze všech {n} lidí — sdružené rozdělení.',
   'theory.table.now': 'Podmíněno na {group} — těchto {n} lidí je nyní 100 %',
   'theory.table.reset': 'Zobrazit zase počty',
-  'theory.table.restrict': 'Podmiňování zahodí všechny mimo skupinu a zbytek přeškáluje na 100 %. Na lidech se nezměnilo nic; změnil se jmenovatel.',
+  'theory.table.restrict': 'Podmiňování zahodí všechny mimo skupinu a zbytek přeškáluje na 100 %. Na lidech se nezměnilo nic. Změnil se jmenovatel.',
   'theory.table.sameNumerator':
-    'Stejný čitatel, jiný jmenovatel. Právě tato jediná záměna je celý rozdíl mezi P(+ | D) a P(D | +) — a celý klam základní míry.',
+    'Stejný čitatel, jiný jmenovatel. Právě tato jediná záměna je celý rozdíl mezi',
+  'theory.table.versus': 'a',
   'theory.hoverHint': 'Najeďte na kterýkoli člen a rozsvítí se větev i buňka, které odpovídá.',
   'theory.formula.negative': 'Negativní výsledek',
   'theory.formula.cleared': 'Pozitivní v testu 1, poté vyloučen testem 2',
   'theory.formula.cleared.hint':
-    'I tato skupina je podmíněná pravděpodobnost — a velmi odlišná od negativních v testu 1, protože zde už byl každý jednou označen.',
+    'Další podmíněná pravděpodobnost, a být v této skupině je mnohem horší než mezi negativními v testu 1. Tady už byl každý jednou označen.',
   'theory.chain.lr2eff': 'Efektivní LR+ testu 2',
   'theory.dependence.active':
-    'Testy zde NEJSOU nezávislé: v {rho} případů test 2 pouze zopakuje test 1. Jeho věrohodnostní poměr se blíží k 1 a potvrzení má odpovídajícím způsobem menší cenu.',
+    'Tyto dva testy nejsou nezávislé. V {rho} případů test 2 jen zopakuje test 1, takže jeho věrohodnostní poměr klesá k 1 a potvrzení vám koupí méně.',
   'theory.refclass': 'Pravděpodobnost o skupině, nikoli o vás',
   'theory.refclass.body':
-    'P(D | +) = {ppv} říká: ze všech, komu vyjde pozitivní výsledek, tento podíl jev skutečně má. Neříká, že konkrétní člověk je z {ppv} nemocný — nikdo není zlomkem případu. Je to tvrzení o referenční skupině, do níž shodou okolností patříte.',
+    'Ze všech, komu vyjde pozitivní výsledek, jev skutečně má {ppv}. Neříká to, že konkrétní člověk je z {ppv} nemocný. Nikdo není zlomkem případu. To číslo popisuje referenční skupinu, do níž shodou okolností patříte.',
   'theory.refclass.note':
     'Změňte, co o člověku víte — věk, příznaky, druhý test — a přesune se do jiné referenční skupiny s jinou pravděpodobností. Přesně to podmiňování dělá.',
   'controls.dependence': 'Sdílené zdroje chyb',
   'controls.dependence.hint':
-    'Jak často test 2 jen zopakuje test 1 místo nezávislého posouzení. 0 % je učebnicový předpoklad; při 100 % druhý pozitivní výsledek neřekne nic nového.',
+    'Jak často test 2 jen zopakuje test 1 místo vlastního posouzení. 0 % je učebnicový předpoklad. Při 100 % vám druhý pozitivní výsledek neřekne nic.',
   'controls.dependence.independent': 'Podmíněně nezávislé (učebnicový předpoklad)',
   'controls.dependence.some': 'V {n} případů test 2 jen kopíruje test 1',
   'theory.flow': 'Celý tok při očekávaných hodnotách',
@@ -219,7 +212,6 @@ export const cs: Record<keyof typeof en, string> = {
   'theory.chain.prior': 'Před testováním',
   'theory.chain.after1': 'Po jednom pozitivním',
   'theory.chain.after2': 'Po dvou pozitivních',
-  'theory.chain.step': '× LR+ = {v}',
   'theory.chain.always':
     'Zobrazeno pro libovolné nastavené hodnoty, bez ohledu na to, zda je potvrzovací testování zapnuté pro simulaci.',
   'theory.step1': 'Přirozené četnosti',
@@ -233,30 +225,23 @@ export const cs: Record<keyof typeof en, string> = {
   'theory.freq.fp': 'z nich vyjde pozitivně přesto (falešně pozitivní)',
   'theory.freq.conclusion':
     'Pozitivně tedy vyjde {pos} lidí a jen {tp} z nich jev skutečně má: {ppv}.',
-  'theory.tree.root': 'Člověk z populace',
   'theory.confusion.title': 'Dvě pravděpodobnosti, které se snadno zamění',
-  'theory.confusion.pPosGivenD': 'P(+ | D)',
-  'theory.confusion.pDGivenPos': 'P(D | +)',
   'theory.confusion.pPosGivenD.label': 'Senzitivita — test je pozitivní, když jev nastal',
   'theory.confusion.pDGivenPos.label':
     'Pozitivní prediktivní hodnota — jev nastal, když je test pozitivní',
   'theory.confusion.warning':
-    'Nejde o totéž číslo a nelze je zaměňovat. Právě jejich záměna je klam základní míry (base-rate fallacy).',
+    'Dvě různá čísla. Zaměňte jedno za druhé a máte klam základní míry (base-rate fallacy).',
   'theory.table.observed': 'Výsledek testu',
   'theory.table.truth': 'Skutečný stav',
   'theory.table.total': 'Celkem',
   'theory.formula.bayes': 'Bayesova věta',
   'theory.formula.total': 'Věta o úplné pravděpodobnosti',
-  'theory.formula.twoStage': 'Dva pozitivní testy',
   'theory.independence':
-    'Tento model předpokládá, že oba testy jsou podmíněně nezávislé při daném skutečném stavu. Skutečné potvrzovací testy často sdílejí zdroje chyb (tatáž rušivá látka, tentýž vzorek), a pak je skutečná sdružená pravděpodobnost méně příznivá, než je zde uvedeno.',
-  'theory.lr': 'Věrohodnostní poměr pozitivního výsledku',
-  'theory.lr.hint': 'Kolikrát pozitivní výsledek vynásobí šanci, že jev nastal',
-  'theory.odds': 'Zápis pomocí šancí',
+    'Model předpokládá, že oba testy jsou podmíněně nezávislé při daném skutečném stavu. Skutečné potvrzovací testy ale často sdílejí zdroje chyb — tutéž rušivou látku, tentýž vzorek. Pak je sdružená pravděpodobnost méně příznivá, než ukazujeme.',
 
   'compare.title': 'Stejný test, jiné světy',
   'compare.intro':
-    'Obě populace jsou testovány naprosto stejným přístrojem. Liší se jen prevalence — a význam pozitivního výsledku se zcela mění.',
+    'V obou populacích stejný přístroj. Liší se jen prevalence a pozitivní výsledek přestává znamenat totéž.',
   'compare.a': 'Populace A',
   'compare.b': 'Populace B',
   'compare.identical': 'Shodný test v obou: senzitivita {se}, specificita {sp}',
@@ -267,7 +252,6 @@ export const cs: Record<keyof typeof en, string> = {
   'compare.curve': 'PPV v závislosti na prevalenci',
   'compare.curve.hint': 'Jak význam pozitivního výsledku závisí na základní míře výskytu',
   'compare.axis.prevalence': 'Prevalence (logaritmická škála)',
-  'compare.axis.ppv': 'P(jev | pozitivní)',
 
   'quiz.title': 'Nejdřív si tipněte',
   'quiz.intro': 'Nepovinné — tipněte si dřív, než se podíváte. Když se spletete, líp si to zapamatujete.',
@@ -277,7 +261,7 @@ export const cs: Record<keyof typeof en, string> = {
   'quiz.yourGuess': 'Váš tip',
   'quiz.actual': 'Skutečnost',
   'quiz.close': 'Blízko — dobře odhadnuto.',
-  'quiz.over': 'Přecenili jste to. Většina lidí ano: skupina zdravých je prostě mnohem větší.',
+  'quiz.over': 'Příliš vysoko. Skoro každý tipne příliš vysoko — skupina zdravých je prostě mnohem větší.',
   'quiz.under': 'Tentokrát jste to podcenili.',
   'quiz.again': 'Změnit tip',
   'quiz.locked': 'Tip uložen. Spusťte simulaci níže a odpověď se objeví pod ní.',
@@ -291,7 +275,7 @@ export const cs: Record<keyof typeof en, string> = {
   'quiz.answer.1':
     'PPV klesá zhruba úměrně prevalenci. Poloviční základní míra znamená přibližně poloviční důvěryhodnost pozitivního výsledku.',
   'quiz.answer.2':
-    'Protože 1 % z velmi velké skupiny zdravých snadno převýší 99 % z velmi malé skupiny nemocných.',
+    '1 % z obrovské skupiny zdravých snadno převýší 99 % z nepatrné skupiny nemocných.',
   'quiz.answer.3':
     'Vynásobí šanci věrohodnostním poměrem druhého testu, což může posunout 9% pravděpodobnost nad 90 %.',
   'quiz.answer.4':
@@ -302,12 +286,4 @@ export const cs: Record<keyof typeof en, string> = {
     'Interaktivní ukázka klamu základní míry: i velmi přesný test může dávat nespolehlivé pozitivní výsledky, pokud je zkoumaný jev vzácný. Vše se počítá přímo v prohlížeči; simulace losuje skutečně náhodné jedince, takže její výsledky kolem teorie kolísají, místo aby jí přesně odpovídaly.',
   'about.close': 'Zavřít',
 
-  'units.people': 'lidí',
-  'units.person': 'osoba',
-  'common.and': 'a',
-  'common.of': 'z',
-  'common.show': 'Zobrazit',
-  'common.hide': 'Skrýt',
-  'common.expand': 'Zobrazit podrobnosti',
-  'common.collapse': 'Zobrazit méně',
 };

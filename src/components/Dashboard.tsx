@@ -4,6 +4,7 @@
  */
 import { useI18n } from '../i18n';
 import { OUTCOME_COLORS } from './Art';
+import { Math as Tex } from './Math';
 import type { ModelResult } from '../lib/probability';
 
 /**
@@ -232,7 +233,9 @@ export function Dashboard({ model, observed, negativeMeans }: DashboardProps) {
           <span className="v">{pct(model.stage1.accuracy, 2)}</span>
         </div>
         <div className="stat">
-          <span className="k">P(+) — {t('flow.positive1')}</span>
+          <span className="k">
+            <Tex tex="P(+)" /> — {t('flow.positive1')}
+          </span>
           <span className="v">{pct(model.stage1.pPositive, 2)}</span>
         </div>
         <div className="stat">
@@ -245,7 +248,9 @@ export function Dashboard({ model, observed, negativeMeans }: DashboardProps) {
         </div>
         {model.pBothPositive !== null && (
           <div className="stat">
-            <span className="k">P(+₁ ∩ +₂)</span>
+            <span className="k">
+              <Tex tex="P(+_1 \cap +_2)" />
+            </span>
             <span className="v">{pct(model.pBothPositive, 3)}</span>
           </div>
         )}

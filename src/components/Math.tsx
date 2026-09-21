@@ -35,6 +35,56 @@ export function Math({ tex, display = false }: { tex: string; display?: boolean 
   );
 }
 
+/**
+ * Percent signs start a comment in TeX, so any locale-formatted number that
+ * reaches a formula has to be escaped first.
+ */
+export function texNum(formatted: string): string {
+  return formatted.replace(/%/g, '\\%');
+}
+
+/** KaTeX inside an SVG, via foreignObject. */
+export function SvgTex({
+  x,
+  y,
+  tex,
+  width = 210,
+  height = 24,
+  align = 'start',
+  color = '#9aa6c8',
+  size = 12,
+}: {
+  x: number;
+  y: number;
+  tex: string;
+  width?: number;
+  height?: number;
+  align?: 'start' | 'middle';
+  color?: string;
+  size?: number;
+}) {
+  return (
+    <foreignObject
+      x={align === 'middle' ? x - width / 2 : x}
+      y={y}
+      width={width}
+      height={height}
+      style={{ overflow: 'visible' }}
+    >
+      <div
+        style={{
+          fontSize: size,
+          color,
+          textAlign: align === 'middle' ? 'center' : 'left',
+          lineHeight: 1.2,
+        }}
+      >
+        <Math tex={tex} />
+      </div>
+    </foreignObject>
+  );
+}
+
 /** Terms a formula can tag so the rest of the page can highlight along. */
 export type TermKey = 'tp' | 'fp' | 'fn' | 'tn' | 'cond' | 'nocond' | 'pos' | 'neg';
 

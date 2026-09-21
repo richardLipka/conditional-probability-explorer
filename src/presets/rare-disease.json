@@ -35,12 +35,12 @@
       "cs": "Skutečně nemocný a správně zachycený — léčba může začít včas, což je celý smysl screeningu."
     },
     "falsePositive": {
-      "en": "Healthy, but told the result is positive: weeks of worry, more appointments and invasive follow-up tests for nothing.",
-      "cs": "Zdravý člověk s pozitivním výsledkem: týdny obav, další návštěvy a zbytečná invazivní vyšetření."
+      "en": "Healthy, and told the result is positive. Weeks of worry and a round of invasive follow-up tests, all for nothing.",
+      "cs": "Zdravý člověk, kterému řekli, že je test pozitivní. Týdny obav a kolo zbytečných invazivních vyšetření."
     },
     "trueNegative": {
-      "en": "Healthy and correctly cleared. Almost everybody ends up here — which is exactly why false positives pile up.",
-      "cs": "Zdravý a správně vyloučený. Sem patří téměř všichni — a právě proto se falešně pozitivních nasčítá tolik."
+      "en": "Healthy and correctly cleared. Almost everybody ends up here. That is exactly why the false positives pile up.",
+      "cs": "Zdravý a správně vyloučený. Sem patří téměř všichni. Právě proto se falešně pozitivních nasčítá tolik."
     },
     "falseNegative": {
       "en": "Genuinely ill but sent home reassured. The disease goes untreated until symptoms appear.",

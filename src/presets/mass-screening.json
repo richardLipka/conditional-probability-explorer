@@ -35,7 +35,7 @@
       "cs": "Správně zachycený ve skupině, kde je postižených naprosté minimum."
     },
     "falsePositive": {
-      "en": "Healthy, but summoned anyway. At this prevalence they outnumber the real cases many times over, and every one of them costs an appointment.",
+      "en": "Healthy, but summoned anyway. At this prevalence they outnumber the real cases many times over, and each one costs an appointment.",
       "cs": "Zdravý, ale přesto pozvaný. Při této prevalenci jich je mnohonásobně víc než skutečných případů a každý stojí jedno vyšetření."
     },
     "trueNegative": {

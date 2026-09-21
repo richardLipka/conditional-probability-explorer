@@ -7,6 +7,7 @@ import { useI18n } from '../i18n';
 import type { ModelParams } from '../lib/types';
 import { oneInN } from '../lib/probability';
 import { parseScenario, type Scenario } from '../lib/scenario';
+import { Math as Tex } from './Math';
 
 const PREV_MIN = 0.0001;
 const PREV_MAX = 0.5;
@@ -28,9 +29,12 @@ function Slider({
   step,
   onChange,
   disabled,
+  tex,
 }: {
   label: string;
   hint?: string;
+  /** Definition of the quantity, typeset rather than written out in ASCII. */
+  tex?: string;
   value: number;
   display: string;
   sub?: string;
@@ -62,6 +66,11 @@ function Slider({
         style={{ ['--fill' as string]: `${fill}%` }}
         aria-describedby={hint ? `${id}-hint` : undefined}
       />
+      {tex && (
+        <div className="field-tex">
+          <Tex tex={tex} />
+        </div>
+      )}
       {(sub || hint) && (
         <div className="field-sub" id={`${id}-hint`}>
           {sub ?? hint}
@@ -196,6 +205,7 @@ export function Controls({
       <Slider
         label={t('controls.prevalence')}
         hint={t('controls.prevalence.hint')}
+        tex="P(D)"
         value={prevToSlider(params.prevalence)}
         min={0}
         max={1000}
@@ -210,6 +220,7 @@ export function Controls({
         <Slider
           label={t('controls.sensitivity')}
           hint={t('controls.sensitivity.hint')}
+          tex="\text{se} = P(+ \mid D)"
           value={params.test1.sensitivity * 100}
           min={0}
           max={100}
@@ -220,6 +231,7 @@ export function Controls({
         <Slider
           label={t('controls.specificity')}
           hint={t('controls.specificity.hint')}
+          tex="\text{sp} = P(- \mid \neg D)"
           value={params.test1.specificity * 100}
           min={0}
           max={100}

@@ -8,7 +8,7 @@ import { OUTCOME_COLORS, Glyph } from './Art';
 import { StreamDiagram } from './StreamDiagram';
 import { DownloadImage } from './DownloadImage';
 import { NegativeAnalysis } from './NegativeAnalysis';
-import { Math as Tex, term, termFromEvent, type TermKey } from './Math';
+import { Math as Tex, SvgTex, texNum, term, termFromEvent, type TermKey } from './Math';
 import { computeModel, expectedCounts, positiveLikelihoodRatio } from '../lib/probability';
 import type { ModelParams, Outcome } from '../lib/types';
 import type { Scenario } from '../lib/scenario';
@@ -42,10 +42,10 @@ function ProbabilityTree({
   const yND = 214;
 
   const leaves: { y: number; w: number; color: string; label: string; from: number; expr: string; key: TermKey }[] = [
-    { y: 40, w: m.stage1.tp, color: OUTCOME_COLORS.truePositive, label: t('outcome.truePositive'), from: yD, expr: 'P(D)·P(+|D)', key: 'tp' },
-    { y: 112, w: m.stage1.fn, color: OUTCOME_COLORS.falseNegative, label: t('outcome.falseNegative'), from: yD, expr: 'P(D)·P(−|D)', key: 'fn' },
-    { y: 190, w: m.stage1.fp, color: OUTCOME_COLORS.falsePositive, label: t('outcome.falsePositive'), from: yND, expr: 'P(¬D)·P(+|¬D)', key: 'fp' },
-    { y: 262, w: m.stage1.tn, color: OUTCOME_COLORS.trueNegative, label: t('outcome.trueNegative'), from: yND, expr: 'P(¬D)·P(−|¬D)', key: 'tn' },
+    { y: 40, w: m.stage1.tp, color: OUTCOME_COLORS.truePositive, label: t('outcome.truePositive'), from: yD, expr: 'P(D)\\,P(+ \\mid D)', key: 'tp' },
+    { y: 112, w: m.stage1.fn, color: OUTCOME_COLORS.falseNegative, label: t('outcome.falseNegative'), from: yD, expr: 'P(D)\\,P(- \\mid D)', key: 'fn' },
+    { y: 190, w: m.stage1.fp, color: OUTCOME_COLORS.falsePositive, label: t('outcome.falsePositive'), from: yND, expr: 'P(\\neg D)\\,P(+ \\mid \\neg D)', key: 'fp' },
+    { y: 262, w: m.stage1.tn, color: OUTCOME_COLORS.trueNegative, label: t('outcome.trueNegative'), from: yND, expr: 'P(\\neg D)\\,P(- \\mid \\neg D)', key: 'tn' },
   ];
 
   const stroke = (w: number) => globalThis.Math.max(1.2, globalThis.Math.sqrt(w) * 13);
@@ -74,27 +74,21 @@ function ProbabilityTree({
 
       <g fontSize="12" fill="#e8ecf8">
         <text x={x1 + 4} y={yD - 8}>D — {t('outcome.hasCondition')}</text>
-        <text x={x1 + 4} y={yD + 12} fill="#9aa6c8" fontSize="11.5">P(D) = {pct(p, 3)}</text>
         <text x={x1 + 4} y={yND - 8}>¬D — {t('outcome.noCondition')}</text>
-        <text x={x1 + 4} y={yND + 12} fill="#9aa6c8" fontSize="11.5">P(¬D) = {pct(1 - p, 3)}</text>
       </g>
+      <SvgTex x={x1 + 4} y={yD + 1} tex={`P(D) = ${texNum(pct(p, 3))}`} />
+      <SvgTex x={x1 + 4} y={yND + 1} tex={`P(\\neg D) = ${texNum(pct(1 - p, 3))}`} />
 
-      <g fontSize="11.5">
-        <text x={(x1 + 70 + x2) / 2} y={58} fill="#9aa6c8" textAnchor="middle">P(+|D) = {pct(se, 1)}</text>
-        <text x={(x1 + 70 + x2) / 2} y={132} fill="#9aa6c8" textAnchor="middle">P(−|D) = {pct(1 - se, 1)}</text>
-        <text x={(x1 + 70 + x2) / 2} y={182} fill="#9aa6c8" textAnchor="middle">P(+|¬D) = {pct(1 - sp, 2)}</text>
-        <text x={(x1 + 70 + x2) / 2} y={282} fill="#9aa6c8" textAnchor="middle">P(−|¬D) = {pct(sp, 2)}</text>
-      </g>
+      <SvgTex align="middle" x={(x1 + 70 + x2) / 2} y={46} tex={`P(+ \\mid D) = ${texNum(pct(se, 1))}`} />
+      <SvgTex align="middle" x={(x1 + 70 + x2) / 2} y={120} tex={`P(- \\mid D) = ${texNum(pct(1 - se, 1))}`} />
+      <SvgTex align="middle" x={(x1 + 70 + x2) / 2} y={170} tex={`P(+ \\mid \\neg D) = ${texNum(pct(1 - sp, 2))}`} />
+      <SvgTex align="middle" x={(x1 + 70 + x2) / 2} y={270} tex={`P(- \\mid \\neg D) = ${texNum(pct(sp, 2))}`} />
 
       {leaves.map((l, i) => (
         <g key={i} opacity={dim([l.key])}>
           <text x={x2 + 10} y={l.y - 3} fontSize="12" fill={l.color}>{l.label}</text>
-          <text x={x2 + 10} y={l.y + 13} fontSize="11.5" fill="#9aa6c8" fontFamily="monospace">
-            {pct(l.w, 4)}
-          </text>
-          <text x={x2 + 10} y={l.y + 26} fontSize="10" fill="#6b779c" fontFamily="monospace">
-            {l.expr}
-          </text>
+          <SvgTex x={x2 + 10} y={l.y + 2} color={l.color} tex={texNum(pct(l.w, 4))} />
+          <SvgTex x={x2 + 10} y={l.y + 17} size={10.5} tex={l.expr} />
         </g>
       ))}
     </svg>
@@ -361,7 +355,11 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
             {(given === 'pos' || given === 'cond') && (
               <div className="warn">
                 <span aria-hidden="true">⚠</span>
-                <span>{t('theory.table.sameNumerator')}</span>
+                <span>
+                  {t('theory.table.sameNumerator')}{' '}
+                  <Tex tex="P(+ \mid D)" /> {t('theory.table.versus')}{' '}
+                  <Tex tex="P(D \mid +)" />.
+                </span>
               </div>
             )}
           </div>
@@ -511,6 +509,7 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
 
       <section className="panel">
         <h3>{t('theory.refclass')}</h3>
+        <Tex display tex={`P(D \\mid +) = ${texNum(pct(m.ppv1, 1))}`} />
         <p style={{ marginTop: 0, color: 'var(--muted)', fontSize: 13.5 }}>
           {t('theory.refclass.body', { ppv: pct(m.ppv1, 1) })}
         </p>
