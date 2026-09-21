@@ -345,14 +345,100 @@ a {
   min-width: 0;
 }
 
+/* The parameter column has to fit the screen. Taller than the viewport and
+   position:sticky never engages at all: the whole panel scrolls away with the
+   page, so you cannot see what you are changing while you read the result it
+   produced. Capping the height keeps it pinned, and gives it its own scrollbar
+   on the rare screen where even the compact version does not fit. Everything
+   below is scoped to .sticky so the sliders in Compare stay as they were. */
 .sticky {
   position: sticky;
   top: 78px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.sticky > .panel {
+  padding: 14px;
+}
+
+.sticky .panel-title {
+  margin-bottom: 10px;
+}
+
+.sticky .field {
+  margin-bottom: 10px;
+}
+
+.sticky .field-head {
+  margin-bottom: 3px;
+}
+
+/* The symbol sits beside its name rather than on a line of its own. */
+.sticky .field-head label {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.sticky .field-tex {
+  margin: 0;
+  font-size: 11px;
+}
+
+.sticky .field-sub {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.sticky input[type='range'] {
+  height: 18px;
+}
+
+.sticky .fieldset {
+  padding: 10px 11px 2px;
+  margin-bottom: 10px;
+}
+
+.advanced {
+  border-top: 1px solid var(--line-soft);
+  margin-top: 2px;
+}
+
+.advanced > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.advanced > summary::-webkit-details-marker {
+  display: none;
+}
+
+.advanced > summary::before {
+  content: '+';
+  color: var(--accent-2);
+  font-family: var(--mono);
+  width: 12px;
+}
+
+.advanced[open] > summary::before {
+  content: '−';
 }
 
 @media (max-width: 1040px) {
   .sticky {
     position: static;
+    max-height: none;
+    overflow: visible;
   }
 }
 

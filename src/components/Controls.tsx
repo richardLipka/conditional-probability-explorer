@@ -51,6 +51,11 @@ function Slider({
       <div className="field-head">
         <label htmlFor={id} title={hint}>
           {label}
+          {tex && (
+            <span className="field-tex">
+              <Tex tex={tex} />
+            </span>
+          )}
         </label>
         <span className="field-value">{display}</span>
       </div>
@@ -66,11 +71,6 @@ function Slider({
         style={{ ['--fill' as string]: `${fill}%` }}
         aria-describedby={hint ? `${id}-hint` : undefined}
       />
-      {tex && (
-        <div className="field-tex">
-          <Tex tex={tex} />
-        </div>
-      )}
       {(sub || hint) && (
         <div className="field-sub" id={`${id}-hint`}>
           {sub ?? hint}
@@ -146,31 +146,6 @@ export function Controls({
       </div>
 
       <div className="field">
-        <div className="toolbar">
-          <button className="btn small ghost" onClick={exportJson}>
-            {t('controls.preset.export')}
-          </button>
-          <button className="btn small ghost" onClick={() => fileRef.current?.click()}>
-            {t('controls.preset.import')}
-          </button>
-          <button className="btn small ghost" onClick={onReset}>
-            {t('controls.reset')}
-          </button>
-          <input
-            ref={fileRef}
-            type="file"
-            accept="application/json,.json"
-            className="sr-only"
-            onChange={(e) => {
-              const f = e.target.files?.[0];
-              if (f) importJson(f);
-              e.target.value = '';
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="field">
         <div className="field-head">
           <label>{t('controls.population')}</label>
           <span className="field-value">{n(params.populationSize)}</span>
@@ -186,20 +161,6 @@ export function Controls({
             </button>
           ))}
         </div>
-        <input
-          type="number"
-          min={10}
-          max={100000}
-          step={100}
-          value={params.populationSize}
-          aria-label={t('controls.population.custom')}
-          onChange={(e) =>
-            set({
-              populationSize: Math.min(100000, Math.max(10, Math.round(Number(e.target.value) || 0))),
-            })
-          }
-          style={{ marginTop: 8 }}
-        />
       </div>
 
       <Slider
@@ -281,59 +242,112 @@ export function Controls({
         />
       </fieldset>
 
-      <fieldset className={`fieldset${params.confirmatory ? '' : ' inactive'}`}>
-        <legend>{t('controls.dependence')}</legend>
-        <Slider
-          label={t('controls.dependence')}
-          hint={t('controls.dependence.hint')}
-          value={params.dependence * 100}
-          min={0}
-          max={100}
-          step={1}
-          display={pct(params.dependence, 0)}
-          sub={
-            params.dependence === 0
-              ? t('controls.dependence.independent')
-              : t('controls.dependence.some', { n: pct(params.dependence, 0) })
-          }
-          onChange={(v) => set({ dependence: v / 100 })}
-        />
-      </fieldset>
-
-      <div className="field" style={{ marginBottom: 0 }}>
-        <div className="field-head">
-          <label htmlFor="seed">{t('controls.seed')}</label>
-        </div>
-        <div className="seg" role="group" aria-label={t('controls.seed')}>
-          <button aria-pressed={!seedLocked} onClick={() => onSeedLocked(false)}>
-            {t('controls.seed.auto')}
-          </button>
-          <button aria-pressed={seedLocked} onClick={() => onSeedLocked(true)}>
-            {t('controls.seed.fixed')}
-          </button>
-        </div>
-        <div className="toolbar" style={{ marginTop: 8, flexWrap: 'nowrap' }}>
+      {/* Everything a student does not touch on first contact. Folded away so
+          the panel fits a laptop screen instead of scrolling off the top of it. */}
+      <details className="advanced">
+        <summary>{t('controls.advanced')}</summary>
+        {/* An arbitrary population is an advanced need; the three presets
+            above are the sizes the lesson actually uses. */}
+        <div className="field">
+          <div className="field-head">
+            <label htmlFor="pop-custom">{t('controls.population.custom')}</label>
+          </div>
           <input
-            id="seed"
+            id="pop-custom"
             type="number"
-            min={1}
-            value={seed}
-            aria-describedby="seed-hint"
-            onChange={(e) => onSeed(Math.max(1, Math.round(Number(e.target.value) || 1)))}
+            min={10}
+            max={100000}
+            step={100}
+            value={params.populationSize}
+            onChange={(e) =>
+              set({
+                populationSize: Math.min(
+                  100000,
+                  Math.max(10, Math.round(Number(e.target.value) || 0)),
+                ),
+              })
+            }
           />
-          <button
-            className="btn small ghost"
-            onClick={onReroll}
-            title={t('controls.seed.reroll')}
-            aria-label={t('controls.seed.reroll')}
-          >
-            ⟳
-          </button>
         </div>
-        <div className="field-sub" id="seed-hint">
-          {seedLocked ? t('controls.seed.hint.fixed') : t('controls.seed.hint.auto')}
+
+        <div className="field">
+          <div className="toolbar">
+            <button className="btn small ghost" onClick={exportJson}>
+              {t('controls.preset.export')}
+            </button>
+            <button className="btn small ghost" onClick={() => fileRef.current?.click()}>
+              {t('controls.preset.import')}
+            </button>
+            <button className="btn small ghost" onClick={onReset}>
+              {t('controls.reset')}
+            </button>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="application/json,.json"
+              className="sr-only"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) importJson(f);
+                e.target.value = '';
+              }}
+            />
+          </div>
         </div>
-      </div>
+        <fieldset className={`fieldset${params.confirmatory ? '' : ' inactive'}`}>
+          <legend>{t('controls.dependence')}</legend>
+          <Slider
+            label={t('controls.dependence')}
+            hint={t('controls.dependence.hint')}
+            value={params.dependence * 100}
+            min={0}
+            max={100}
+            step={1}
+            display={pct(params.dependence, 0)}
+            sub={
+              params.dependence === 0
+                ? t('controls.dependence.independent')
+                : t('controls.dependence.some', { n: pct(params.dependence, 0) })
+            }
+            onChange={(v) => set({ dependence: v / 100 })}
+          />
+        </fieldset>
+
+        <div className="field" style={{ marginBottom: 0 }}>
+          <div className="field-head">
+            <label htmlFor="seed">{t('controls.seed')}</label>
+          </div>
+          <div className="seg" role="group" aria-label={t('controls.seed')}>
+            <button aria-pressed={!seedLocked} onClick={() => onSeedLocked(false)}>
+              {t('controls.seed.auto')}
+            </button>
+            <button aria-pressed={seedLocked} onClick={() => onSeedLocked(true)}>
+              {t('controls.seed.fixed')}
+            </button>
+          </div>
+          <div className="toolbar" style={{ marginTop: 8, flexWrap: 'nowrap' }}>
+            <input
+              id="seed"
+              type="number"
+              min={1}
+              value={seed}
+              aria-describedby="seed-hint"
+              onChange={(e) => onSeed(Math.max(1, Math.round(Number(e.target.value) || 1)))}
+            />
+            <button
+              className="btn small ghost"
+              onClick={onReroll}
+              title={t('controls.seed.reroll')}
+              aria-label={t('controls.seed.reroll')}
+            >
+              ⟳
+            </button>
+          </div>
+          <div className="field-sub" id="seed-hint">
+            {seedLocked ? t('controls.seed.hint.fixed') : t('controls.seed.hint.auto')}
+          </div>
+        </div>
+      </details>
     </div>
   );
 }
