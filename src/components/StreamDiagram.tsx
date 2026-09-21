@@ -99,6 +99,31 @@ export function StreamDiagram({
     ? { t0: 10, t1: 128, g1: 156, r1: 404, n1: 436, c1: 480, g2: 508, r2: 742, n2: 774 }
     : { t0: 10, t1: 150, g1: 178, r1: 612, n1: 644, c1: 0, g2: 0, r2: 0, n2: 0 };
 
+  /**
+   * Which stage-1 ribbons had to be drawn thicker than the truth.
+   *
+   * bandHeights floors every non-empty stream at MIN_RIBBON so that a group
+   * cannot vanish entirely, which means a caption promising "width is
+   * head-count" is only honest about the streams that never hit that floor.
+   * Name the ones that did, with the width they would really have had. In the
+   * airport scenario that is three of the four; with a common disease it is
+   * one; the caption has to say which.
+   */
+  const widened = useMemo(() => {
+    const bands = [
+      { key: 'tp' as const, value: c.tp1 },
+      { key: 'fn' as const, value: c.fn1 },
+      { key: 'fp' as const, value: c.fp1 },
+      { key: 'tn' as const, value: c.tn1 },
+    ];
+    const total = bands.reduce((a, b) => a + b.value, 0);
+    if (total <= 0 || availA <= 0) return [];
+    const scale = availA / total;
+    return bands
+      .filter((b) => b.value > 0 && b.value * scale < MIN_RIBBON)
+      .map((b) => ({ key: b.key, px: b.value * scale }));
+  }, [c, availA]);
+
   const geo = useMemo(() => {
     const [hTP, hFN, hFP, hTN] = bandHeights([c.tp1, c.fn1, c.fp1, c.tn1], availA);
     const hPos = hTP + hFP;
@@ -517,7 +542,17 @@ export function StreamDiagram({
           </g>
 
           <text x={xa.t0} y={A.H - 8} fontSize="10.5" fill="#6b779c">
-            {t('stream.trueScale')}
+            {t('stream.trueScale')}{' '}
+            {widened.length === 0
+              ? t('stream.trueScale.exact')
+              : t('stream.trueScale.thin', {
+                  list: widened
+                    .map(
+                      (w) =>
+                        `${label[w.key]} ${n(w.px, w.px < 0.01 ? 3 : w.px < 1 ? 2 : 1)} px`,
+                    )
+                    .join(' · '),
+                })}
           </text>
         </svg>
       </div>
