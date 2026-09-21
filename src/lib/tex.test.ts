@@ -8,9 +8,12 @@ import { join } from 'node:path';
 import katex from 'katex';
 import { texNum } from '../components/Math';
 
-const COMPONENTS = join(import.meta.dirname ?? 'src/components', '..', 'components');
-const files = readdirSync(COMPONENTS).filter((f) => f.endsWith('.tsx'));
-const sources = files.map((f) => [f, readFileSync(join(COMPONENTS, f), 'utf8')] as const);
+// vitest runs from the project root, so this resolves without node typings.
+const COMPONENTS = join('src', 'components');
+const files: string[] = readdirSync(COMPONENTS).filter((f: string) => f.endsWith('.tsx'));
+const sources: (readonly [string, string])[] = files.map(
+  (f: string) => [f, readFileSync(join(COMPONENTS, f), 'utf8')] as const,
+);
 
 const BS = '\\';
 
