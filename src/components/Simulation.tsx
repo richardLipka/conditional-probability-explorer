@@ -233,13 +233,15 @@ export function Simulation({ params, seed, onNewSeed, scenario, reveal }: Simula
           <ScenarioArt art={scenario.art} className="intro-art sim-art" />
         </div>
 
+        {/* A count is a result. Until the run has happened this is only the key
+            to the colours and the shapes, otherwise the answer sits on screen
+            before anybody has watched anything. */}
         <div className="legend">
           {(['truePositive', 'falsePositive', 'falseNegative', 'trueNegative'] as const).map((k) => (
             <span className="legend-item" key={k}>
               <Glyph kind={k} />
               <b>{t(`outcome.${k}`)}</b>
-              {' — '}
-              {n(legendCounts[k], decimals)}
+              {hasRun && ` — ${n(legendCounts[k], decimals)}`}
             </span>
           ))}
         </div>
@@ -303,12 +305,16 @@ export function Simulation({ params, seed, onNewSeed, scenario, reveal }: Simula
       <OutcomeMeanings
         scenario={scenario}
         decimals={decimals}
-        counts={{
-          truePositive: legendCounts.truePositive,
-          falsePositive: legendCounts.falsePositive,
-          falseNegative: legendCounts.falseNegative,
-          trueNegative: legendCounts.trueNegative,
-        }}
+        counts={
+          hasRun
+            ? {
+                truePositive: legendCounts.truePositive,
+                falsePositive: legendCounts.falsePositive,
+                falseNegative: legendCounts.falseNegative,
+                trueNegative: legendCounts.trueNegative,
+              }
+            : null
+        }
       />
     </div>
   );

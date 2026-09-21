@@ -11,7 +11,8 @@ const ORDER: Outcome[] = ['truePositive', 'falsePositive', 'falseNegative', 'tru
 
 export interface OutcomeMeaningsProps {
   scenario: Scenario;
-  counts: Record<Outcome, number>;
+  /** Null until a run has produced some. The wording stands on its own. */
+  counts: Record<Outcome, number> | null;
   decimals?: number;
 }
 
@@ -46,7 +47,7 @@ export function OutcomeMeanings({ scenario, counts, decimals = 0 }: OutcomeMeani
             <header>
               <Glyph kind={key} />
               <strong>{t(`outcome.${key}`)}</strong>
-              <span className="count">{n(counts[key], decimals)}</span>
+              {counts && <span className="count">{n(counts[key], decimals)}</span>}
             </header>
             <p>{scenario.outcomes[key][lang]}</p>
           </article>
