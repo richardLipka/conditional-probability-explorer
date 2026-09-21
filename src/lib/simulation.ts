@@ -76,11 +76,30 @@ export function emptyCounts(population = 0): SimulationCounts {
  *   3. test 2 (only when test 1 was positive and confirmatory testing is on)
  */
 export function runSimulation(params: ModelParams, seed: number): SimulationResult {
+  return simulate(params, seed, true);
+}
+
+/**
+ * The same draw, without the per-person arrays.
+ *
+ * Repeating a run a hundred times to show how much the answer wobbles means a
+ * hundred allocations of three typed arrays that nobody reads. The counts are
+ * all that picture needs.
+ */
+export function simulateCounts(params: ModelParams, seed: number): SimulationCounts {
+  return simulate(params, seed, false).counts;
+}
+
+function simulate(params: ModelParams, seed: number, keep: boolean): SimulationResult {
   const n = Math.max(0, Math.floor(params.populationSize));
   const rng = makeRng(seed);
-  const condition = new Uint8Array(n);
-  const test1 = new Uint8Array(n);
-  const test2 = new Uint8Array(n);
+  // Length zero when the individuals are not wanted. The draw itself is
+  // untouched: every rng() call happens in the same order either way, so the
+  // same seed gives the same counts whichever path is taken.
+  const size = keep ? n : 0;
+  const condition = new Uint8Array(size);
+  const test1 = new Uint8Array(size);
+  const test2 = new Uint8Array(size);
   const c = emptyCounts(n);
 
   const { prevalence, confirmatory } = params;
@@ -94,12 +113,12 @@ export function runSimulation(params: ModelParams, seed: number): SimulationResu
 
   for (let i = 0; i < n; i++) {
     const hasCond = rng() < prevalence;
-    condition[i] = hasCond ? 1 : 0;
+    if (keep) condition[i] = hasCond ? 1 : 0;
     if (hasCond) c.withCondition++;
     else c.withoutCondition++;
 
     const pos1 = rng() < (hasCond ? se1 : fpr1);
-    test1[i] = pos1 ? 1 : 0;
+    if (keep) test1[i] = pos1 ? 1 : 0;
 
     if (pos1) {
       c.positive1++;
@@ -113,7 +132,7 @@ export function runSimulation(params: ModelParams, seed: number): SimulationResu
 
     if (confirmatory && pos1) {
       const pos2 = rng() < (hasCond ? se2 : fpr2);
-      test2[i] = pos2 ? 2 : 1;
+      if (keep) test2[i] = pos2 ? 2 : 1;
       if (pos2) {
         c.positive2++;
         if (hasCond) c.tp2++;

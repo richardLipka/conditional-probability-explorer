@@ -298,6 +298,8 @@ export function Simulation({
           <Dashboard
             negativeMeans={scenario.negativeMeans[lang]}
             model={model}
+            params={params}
+            seed={seed}
             observed={
               hasRun && mode === 'random'
                 ? { ppv1: observedPpv1(counts), ppv2: observedPpv2(counts) }

@@ -10,7 +10,7 @@ import {
   negativeGroups,
   positiveLikelihoodRatio,
 } from './probability';
-import { runSimulation } from './simulation';
+import { observedPpv1, runSimulation, simulateCounts } from './simulation';
 import { scenarios } from '../presets';
 import type { ModelParams } from './types';
 
@@ -263,4 +263,79 @@ describe('every bundled scenario is internally consistent', () => {
       expect(counts.positive1).toBe(counts.tp1 + counts.fp1);
     });
   }
+});
+
+/**
+ * Repeating a run is a claim about sampling, so it gets checked like one. The
+ * panel tells a student that one run wobbles around the theory and that the
+ * wobble shrinks with the population. Both of those are numbers, not opinions.
+ */
+describe('repeating a run', () => {
+  const RARE: ModelParams = {
+    prevalence: 0.001,
+    test1: { sensitivity: 0.99, specificity: 0.99 },
+    test2: { sensitivity: 0.99, specificity: 0.99 },
+    confirmatory: false,
+    populationSize: 10000,
+    dependence: 0,
+  };
+
+  /** Observed PPV over `runs` independent draws, and how many produced none. */
+  function sample(params: ModelParams, runs: number, seed = 5000) {
+    const values: number[] = [];
+    let noPositives = 0;
+    for (let i = 0; i < runs; i++) {
+      const p = observedPpv1(simulateCounts(params, seed + i));
+      if (p === null) noPositives++;
+      else values.push(p);
+    }
+    const mean = values.reduce((a, b) => a + b, 0) / values.length;
+    const sd = Math.sqrt(values.reduce((a, b) => a + (b - mean) ** 2, 0) / values.length);
+    return { values, mean, sd, noPositives };
+  }
+
+  it('counts the same people whether or not the individuals are kept', () => {
+    // simulateCounts exists only to skip three allocations. If it ever drew a
+    // different population the panel would contradict the run above it.
+    for (const seed of [1, 99, 123456]) {
+      for (const confirmatory of [false, true]) {
+        const params = { ...RARE, confirmatory, populationSize: 3000 };
+        expect(simulateCounts(params, seed)).toEqual(runSimulation(params, seed).counts);
+      }
+    }
+  });
+
+  it('scatters around the closed form rather than beside it', () => {
+    const { mean } = sample(RARE, 400);
+    expect(Math.abs(mean - computeModel(RARE).ppv1)).toBeLessThan(0.005);
+  });
+
+  it('tightens like one over the square root of the population', () => {
+    const small = sample({ ...RARE, populationSize: 1000 }, 400);
+    const large = sample({ ...RARE, populationSize: 10000 }, 400);
+    expect(large.sd).toBeLessThan(small.sd);
+    // Ten times the people should be about √10 ≈ 3.16 times tighter. Monte
+    // Carlo on a Monte Carlo, so the band is wide on purpose.
+    const ratio = small.sd / large.sd;
+    expect(ratio).toBeGreaterThan(2.2);
+    expect(ratio).toBeLessThan(4.5);
+  });
+
+  it('produces no answer at all as often as the algebra says it should', () => {
+    // The most striking number in the panel: with a rare condition and a small
+    // population, plenty of runs turn up nobody positive, so there is nothing
+    // to divide. P(no positives) = (1 − P(+))^n exactly.
+    const params = { ...RARE, populationSize: 100 };
+    const runs = 2000;
+    const expected = Math.pow(1 - computeModel(params).stage1.pPositive, 100);
+    const { noPositives } = sample(params, runs, 90000);
+    expect(expected).toBeGreaterThan(0.2); // the case is worth showing at all
+    expect(Math.abs(noPositives / runs - expected)).toBeLessThan(0.04);
+  });
+
+  it('gives the same picture for the same seed', () => {
+    const a = sample(RARE, 40, 777).values;
+    const b = sample(RARE, 40, 777).values;
+    expect(a).toEqual(b);
+  });
 });

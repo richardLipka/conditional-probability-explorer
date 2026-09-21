@@ -166,6 +166,20 @@ export const en = {
   'export.params':
     'Population {n} · prevalence {prev} · test 1 sensitivity {se} / specificity {sp}{second}',
   'export.params.second': ' · test 2 sensitivity {se2} / specificity {sp2}',
+  'repeat.summary': 'Why doesn’t one run match the theory?',
+  'repeat.body':
+    'One run is one sample. Run the same settings a hundred times and the answers scatter around the theory. How widely depends on how many people you tested.',
+  'repeat.tick': 'Each tick is one run. {n} runs at every population size.',
+  'repeat.theory': 'theory',
+  'repeat.yours': 'your run',
+  'repeat.yourSetting': 'your setting',
+  'repeat.people': '{n} people',
+  'repeat.none':
+    'At {pop} people, nobody tested positive in {n} of {runs} runs. No positives, nothing to work out.',
+  'repeat.axis': 'Probability the condition is present, given a positive result',
+  'repeat.insight':
+    'A rare condition is hard to find and hard to measure, and it is the same reason both times: almost nobody has it. Ten real cases carry the whole estimate. Ten is not many.',
+
   'export.tree': 'Probability tree',
   'export.curve': 'PPV against prevalence',
   'export.params.curve':

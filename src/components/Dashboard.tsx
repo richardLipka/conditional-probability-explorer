@@ -5,7 +5,9 @@
 import { useI18n } from '../i18n';
 import { OUTCOME_COLORS } from './Art';
 import { Math as Tex } from './Math';
+import { RepeatRuns } from './RepeatRuns';
 import type { ModelResult } from '../lib/probability';
+import type { ModelParams } from '../lib/types';
 
 /**
  * Czech needs three plural forms (1 / 2–4 / 5+); English collapses the last two.
@@ -42,6 +44,8 @@ function HundredGrid({ ppv }: { ppv: number }) {
 
 export interface DashboardProps {
   model: ModelResult;
+  params: ModelParams;
+  seed: number;
   /** Plain-language reading of a negative result in this scenario. */
   negativeMeans?: string;
   /** Observed values from a random run, when there is one. */
@@ -111,7 +115,7 @@ function NegativeCard({
   );
 }
 
-export function Dashboard({ model, observed, negativeMeans }: DashboardProps) {
+export function Dashboard({ model, params, seed, observed, negativeMeans }: DashboardProps) {
   const { t, pct, n } = useI18n();
   const ppv1 = model.ppv1;
   const ppv2 = model.ppv2;
@@ -215,6 +219,17 @@ export function Dashboard({ model, observed, negativeMeans }: DashboardProps) {
           />
         )}
       </div>
+
+      {/* The two cards above print a theoretical figure beside an observed one
+          and leave the reader wondering which is wrong. The answer belongs
+          here, one line down, and folded away until it is asked for. */}
+      {observed && (
+        <details className="repeat">
+          <summary>{t('repeat.summary')}</summary>
+          <p>{t('repeat.body')}</p>
+          <RepeatRuns params={params} seed={seed} yourRun={observed.ppv1} />
+        </details>
+      )}
 
       {oddsGain !== null && (
         <div className="compare-row">

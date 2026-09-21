@@ -170,6 +170,20 @@ export const cs: Record<keyof typeof en, string> = {
   'export.params':
     'Populace {n} · prevalence {prev} · test 1 senzitivita {se} / specificita {sp}{second}',
   'export.params.second': ' · test 2 senzitivita {se2} / specificita {sp2}',
+  'repeat.summary': 'Proč jeden běh nesedí s teorií?',
+  'repeat.body':
+    'Jeden běh je jeden vzorek. Spusťte stejné nastavení stokrát a výsledky se rozsypou kolem teorie. Jak široce, to závisí na tom, kolik lidí jste otestovali.',
+  'repeat.tick': 'Každá čárka je jeden běh. {n} běhů pro každou velikost populace.',
+  'repeat.theory': 'teorie',
+  'repeat.yours': 'váš běh',
+  'repeat.yourSetting': 'vaše nastavení',
+  'repeat.people': '{n} lidí',
+  'repeat.none':
+    'Běhů bez jediného pozitivního výsledku při {pop} lidech: {n} ze {runs}. Žádní pozitivní, není co počítat.',
+  'repeat.axis': 'Pravděpodobnost, že jev nastal, při pozitivním výsledku',
+  'repeat.insight':
+    'Vzácný jev se těžko odhaluje i těžko měří a je to pokaždé ze stejného důvodu: skoro nikdo ho nemá. Celý odhad stojí na deseti skutečných případech. Deset není moc.',
+
   'export.tree': 'Pravděpodobnostní strom',
   'export.curve': 'PPV podle prevalence',
   'export.params.curve':
