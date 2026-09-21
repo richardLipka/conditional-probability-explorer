@@ -9,6 +9,7 @@ import { StreamDiagram } from './StreamDiagram';
 import { DownloadImage } from './DownloadImage';
 import { NegativeAnalysis } from './NegativeAnalysis';
 import { Math as Tex, SvgTex, texNum, term, termFromEvent, type TermKey } from './Math';
+import { StepNav, type Step } from './StepNav';
 import { computeModel, expectedCounts, positiveLikelihoodRatio } from '../lib/probability';
 import type { ModelParams, Outcome } from '../lib/types';
 import type { Scenario } from '../lib/scenario';
@@ -112,6 +113,25 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
   const [given, setGiven] = useState<Given>('none');
   const [highlight, setHighlight] = useState<TermKey | null>(null);
 
+  const steps: Step[] = useMemo(
+    () => [
+      { id: 'th-flow', label: t('theory.nav.flow') },
+      { id: 'th-frequencies', label: t('theory.step1'), n: 1 },
+      { id: 'th-tree', label: t('theory.step2'), n: 2 },
+      { id: 'th-table', label: t('theory.step3'), n: 3 },
+      { id: 'th-confusion', label: t('theory.nav.confusion') },
+      { id: 'th-formula', label: t('theory.step4'), n: 4 },
+      { id: 'th-chain', label: t('theory.chain'), n: 5 },
+      // NegativeAnalysis draws nothing without a second test, so the rail
+      // must not offer a chip that scrolls to an empty anchor.
+      ...(params.confirmatory
+        ? [{ id: 'th-negatives', label: t('theory.nav.negatives') }]
+        : []),
+      { id: 'th-refclass', label: t('theory.nav.refclass') },
+    ],
+    [t, params.confirmatory],
+  );
+
   const m = useMemo(() => computeModel(params), [params]);
   const c = useMemo(
     () => expectedCounts({ ...params, populationSize: freqSize }),
@@ -167,7 +187,13 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
       onMouseOver={(e) => setHighlight(termFromEvent(e.target))}
       onMouseLeave={() => setHighlight(null)}
     >
-      <section className="panel">
+      <StepNav
+        steps={steps}
+        label={t('theory.nav.label')}
+        progress={(cur, total) => t('theory.nav.progress', { n: cur, total })}
+      />
+
+      <section className="panel" id="th-flow">
         <div className="panel-title">
           <h3>{t('theory.flow')}</h3>
         </div>
@@ -194,7 +220,7 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-frequencies">
         <div className="panel-title">
           <h3>{t('theory.title')}</h3>
           <span className="hint">{t('nav.theory.desc')}</span>
@@ -262,12 +288,23 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         </p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-tree">
         <div className="step-badge"><i>2</i>{t('theory.step2')}</div>
-        <ProbabilityTree params={params} highlight={highlight} />
+        <div className="theory-tree visual">
+          <ProbabilityTree params={params} highlight={highlight} />
+          <DownloadImage
+            target={() => [...document.querySelectorAll('.theory-tree svg')]}
+            title={`${scenario.name[lang]} — ${t('export.tree')}`}
+            subtitle={scenario.question[lang]}
+            params={params}
+            counts={c}
+            decimals={1}
+            filenameHint={`${scenario.id}-tree`}
+          />
+        </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-table">
         <div className="step-badge"><i>3</i>{t('theory.step3')}</div>
         <p style={{ marginTop: 0, color: 'var(--muted)', fontSize: 13.5 }}>
           {t('theory.table.howto')}
@@ -388,7 +425,7 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-confusion">
         <h3>{t('theory.confusion.title')}</h3>
         <div className="confusion">
           <div className="confusion-card a">
@@ -412,7 +449,7 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-formula">
         <div className="step-badge"><i>4</i>{t('theory.step4')}</div>
         <p className="field-sub" style={{ marginTop: 0 }}>{t('theory.hoverHint')}</p>
 
@@ -450,7 +487,7 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         )}
       </section>
 
-      <section className="panel">
+      <section className="panel" id="th-chain">
         <div className="step-badge">
           <i>5</i>
           {t('theory.chain')}
@@ -516,9 +553,11 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
         </div>
       </section>
 
-      <NegativeAnalysis counts={c} confirmatory={params.confirmatory} decimals={1} />
+      <div id="th-negatives">
+        <NegativeAnalysis counts={c} confirmatory={params.confirmatory} decimals={1} />
+      </div>
 
-      <section className="panel">
+      <section className="panel" id="th-refclass">
         <h3>{t('theory.refclass')}</h3>
         <Tex display tex={`P(D \\mid +) = ${texNum(pct(m.ppv1, 1))}`} />
         <p style={{ marginTop: 0, color: 'var(--muted)', fontSize: 13.5 }}>

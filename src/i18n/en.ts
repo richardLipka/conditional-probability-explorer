@@ -166,6 +166,10 @@ export const en = {
   'export.params':
     'Population {n} · prevalence {prev} · test 1 sensitivity {se} / specificity {sp}{second}',
   'export.params.second': ' · test 2 sensitivity {se2} / specificity {sp2}',
+  'export.tree': 'Probability tree',
+  'export.curve': 'PPV against prevalence',
+  'export.params.curve':
+    'Test 1 sensitivity {se} / specificity {sp} · prevalence runs along the horizontal axis',
   'export.credit': 'Conditional Probability Explorer',
   'dash.insight.rare':
     'The condition is rare. Most positives come out of the enormous healthy group, so specificity sets the ceiling here. Sensitivity barely moves the answer.',
@@ -174,6 +178,12 @@ export const en = {
   'dash.insight.confirm':
     'A second independent positive multiplies the odds again. That is why nobody acts on a single positive when the condition is rare.',
 
+  'theory.nav.label': 'Sections of the derivation',
+  'theory.nav.progress': '{n} of {total}',
+  'theory.nav.flow': 'The flow',
+  'theory.nav.confusion': 'The mix-up',
+  'theory.nav.negatives': 'Negative results',
+  'theory.nav.refclass': 'Reference class',
   'theory.title': 'Where the number comes from',
   'theory.table.howto': 'Click a row or a column to condition on it. The group you pick becomes the whole population.',
   'theory.table.hint': 'Right now every cell is a share of all {n} people — the joint distribution.',

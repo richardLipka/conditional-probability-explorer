@@ -14,9 +14,12 @@ export interface DownloadImageProps {
   title: string;
   subtitle?: string;
   params: ModelParams;
-  counts: { tp1: number; fp1: number; fn1: number; tn1: number };
+  /** Omitted for a picture that is not about the four outcomes. */
+  counts?: { tp1: number; fp1: number; fn1: number; tn1: number };
   decimals?: number;
   filenameHint: string;
+  /** Replaces the parameter line when the usual one would mislead. */
+  footer?: string;
 }
 
 /**
@@ -31,6 +34,7 @@ export function DownloadImage({
   counts,
   decimals = 0,
   filenameHint,
+  footer,
 }: DownloadImageProps) {
   const { t, n, pct } = useI18n();
   const [busy, setBusy] = useState(false);
@@ -41,7 +45,7 @@ export function DownloadImage({
     if (!els.length || busy) return;
     setBusy(true);
     try {
-      const legend: LegendEntry[] = [
+      const legend: LegendEntry[] | undefined = counts && [
         {
           color: OUTCOME_COLORS.truePositive,
           label: t('outcome.truePositive'),
@@ -79,13 +83,15 @@ export function DownloadImage({
         title,
         subtitle,
         legend,
-        footer: t('export.params', {
-          n: n(params.populationSize),
-          prev: pct(params.prevalence, params.prevalence < 0.01 ? 3 : 1),
-          se: pct(params.test1.sensitivity, 1),
-          sp: pct(params.test1.specificity, 2),
-          second,
-        }),
+        footer:
+          footer ??
+          t('export.params', {
+            n: n(params.populationSize),
+            prev: pct(params.prevalence, params.prevalence < 0.01 ? 3 : 1),
+            se: pct(params.test1.sensitivity, 1),
+            sp: pct(params.test1.specificity, 2),
+            second,
+          }),
         credit: t('export.credit'),
         filename: `${slug(filenameHint)}.png`,
       });

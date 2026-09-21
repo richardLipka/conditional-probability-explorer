@@ -9,6 +9,7 @@ import { Math as Tex, SvgTex } from './Math';
 import { computeModel, expectedCounts, oneInN } from '../lib/probability';
 import type { ModelParams } from '../lib/types';
 import { FlowDiagram } from './FlowDiagram';
+import { DownloadImage } from './DownloadImage';
 
 const PREV_MIN = 0.0001;
 const PREV_MAX = 0.5;
@@ -200,7 +201,20 @@ export function Compare({ params }: { params: ModelParams }) {
           <h3>{t('compare.curve')}</h3>
           <span className="hint">{t('compare.curve.hint')}</span>
         </div>
-        <PpvCurve params={params} a={prevA} b={prevB} />
+        <div className="compare-curve visual">
+          <PpvCurve params={params} a={prevA} b={prevB} />
+          <DownloadImage
+            target={() => [...document.querySelectorAll('.compare-curve svg')]}
+            title={t('compare.curve')}
+            subtitle={t('compare.curve.hint')}
+            params={params}
+            filenameHint="ppv-against-prevalence"
+            footer={t('export.params.curve', {
+              se: pct(params.test1.sensitivity, 1),
+              sp: pct(params.test1.specificity, 2),
+            })}
+          />
+        </div>
       </section>
     </div>
   );

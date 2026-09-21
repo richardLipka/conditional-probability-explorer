@@ -170,6 +170,10 @@ export const cs: Record<keyof typeof en, string> = {
   'export.params':
     'Populace {n} · prevalence {prev} · test 1 senzitivita {se} / specificita {sp}{second}',
   'export.params.second': ' · test 2 senzitivita {se2} / specificita {sp2}',
+  'export.tree': 'Pravděpodobnostní strom',
+  'export.curve': 'PPV podle prevalence',
+  'export.params.curve':
+    'Test 1 senzitivita {se} / specificita {sp} · prevalence běží po vodorovné ose',
   'export.credit': 'Průzkumník podmíněné pravděpodobnosti',
   'dash.insight.rare':
     'Jev je vzácný. Většina pozitivních výsledků vzejde z obrovské skupiny zdravých, takže strop odpovědi určuje specificita. Senzitivita s ní skoro nehne.',
@@ -178,6 +182,12 @@ export const cs: Record<keyof typeof en, string> = {
   'dash.insight.confirm':
     'Druhý nezávislý pozitivní výsledek šanci znovu vynásobí. Proto u vzácných jevů nikdo nejedná podle jediného pozitivního testu.',
 
+  'theory.nav.label': 'Části odvození',
+  'theory.nav.progress': '{n} z {total}',
+  'theory.nav.flow': 'Celý tok',
+  'theory.nav.confusion': 'Záměna',
+  'theory.nav.negatives': 'Negativní výsledky',
+  'theory.nav.refclass': 'Referenční třída',
   'theory.title': 'Odkud se to číslo bere',
   'theory.table.howto': 'Klikněte na řádek nebo sloupec a podmiňte jím. Vybraná skupina se stane celou populací.',
   'theory.table.hint': 'Teď je každá buňka podílem ze všech {n} lidí — sdružené rozdělení.',
