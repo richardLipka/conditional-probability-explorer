@@ -10,6 +10,7 @@ import { Simulation } from './components/Simulation';
 import { Theory } from './components/Theory';
 import { Compare } from './components/Compare';
 import { PredictionInput, PredictionReveal } from './components/Prediction';
+import { RevealGate } from './components/RevealGate';
 import { scenarios, defaultScenario, scenarioById } from './presets';
 import { applyOverrides, buildQuery, readQuery, type Scenario } from './lib/scenario';
 import type { ModelParams } from './lib/types';
@@ -34,11 +35,17 @@ export default function App() {
   const [seedLocked, setSeedLocked] = useState(false);
   const [about, setAbout] = useState(false);
   const [guess, setGuess] = useState<number | null>(null);
+  // Every panel that prints a posterior waits for this. Guessing, skipping
+  // the guess, or running the simulation all count as committing to look.
+  const [revealed, setRevealed] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const loadScenario = (s: Scenario) => {
     setScenario(s);
     setParams(s.params);
+    // A guess belongs to the scenario it was made about. Comparing one made
+    // for a rare disease against an airport screen would mean nothing.
+    setGuess(null);
   };
 
   // Keep the address bar in step, so the link is always shareable as it stands.
@@ -216,7 +223,15 @@ export default function App() {
               should not throw away a simulation run you just watched. */}
           <main role="tabpanel">
             <div style={{ display: tab === 'simulation' ? undefined : 'none' }}>
-              <PredictionInput params={params} guess={guess} onGuess={setGuess} />
+              <PredictionInput
+                params={params}
+                guess={guess}
+                onGuess={(v) => {
+                  setGuess(v);
+                  if (v !== null) setRevealed(true);
+                }}
+                onSkip={() => setRevealed(true)}
+              />
               <div style={{ height: 16 }} />
               <Simulation
                 params={params}
@@ -226,13 +241,19 @@ export default function App() {
                   if (!seedLocked) setSeed(randomSeed());
                 }}
                 reveal={<PredictionReveal params={params} guess={guess} />}
+                revealed={revealed}
+                onReveal={() => setRevealed(true)}
               />
             </div>
             <div style={{ display: tab === 'theory' ? undefined : 'none' }}>
-              <Theory params={params} scenario={scenario} />
+              <RevealGate revealed={revealed} onReveal={() => setRevealed(true)}>
+                <Theory params={params} scenario={scenario} />
+              </RevealGate>
             </div>
             <div style={{ display: tab === 'compare' ? undefined : 'none' }}>
-              <Compare params={params} />
+              <RevealGate revealed={revealed} onReveal={() => setRevealed(true)}>
+                <Compare params={params} />
+              </RevealGate>
             </div>
           </main>
         </div>

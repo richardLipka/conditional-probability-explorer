@@ -16,6 +16,7 @@ import type { Scenario } from '../lib/scenario';
 import { OutcomeMeanings } from './OutcomeMeanings';
 import { NegativeAnalysis } from './NegativeAnalysis';
 import { DownloadImage } from './DownloadImage';
+import { RevealGate } from './RevealGate';
 
 type Mode = 'random' | 'expected';
 
@@ -34,9 +35,20 @@ export interface SimulationProps {
   scenario: Scenario;
   /** Shown once a run has finished, before any panel gives the answer away. */
   reveal?: ReactNode;
+  /** False until the reader has committed to a guess, skipped, or run it. */
+  revealed: boolean;
+  onReveal: () => void;
 }
 
-export function Simulation({ params, seed, onNewSeed, scenario, reveal }: SimulationProps) {
+export function Simulation({
+  params,
+  seed,
+  onNewSeed,
+  scenario,
+  reveal,
+  revealed,
+  onReveal,
+}: SimulationProps) {
   const { t, n, pct, lang } = useI18n();
   const [mode, setMode] = useState<Mode>('random');
   const [focused, setFocused] = useState(false);
@@ -104,6 +116,8 @@ export function Simulation({ params, seed, onNewSeed, scenario, reveal }: Simula
   };
 
   const run = () => {
+    // Running it is committing to look, so it opens the gate as well.
+    onReveal();
     // Ask for a seed first: unlocked that means a new draw, locked it is a
     // no-op and the identical run replays.
     onNewSeed();
@@ -276,23 +290,25 @@ export function Simulation({ params, seed, onNewSeed, scenario, reveal }: Simula
         </section>
       )}
 
-      <section className="panel">
-        <div className="panel-title">
-          <h3>{t('dash.headline')}</h3>
-        </div>
-        <Dashboard
-          negativeMeans={scenario.negativeMeans[lang]}
-          model={model}
-          observed={
-            hasRun && mode === 'random'
-              ? { ppv1: observedPpv1(counts), ppv2: observedPpv2(counts) }
-              : null
-          }
-        />
-        {hasRun && mode === 'random' && counts.positive1 === 0 && (
-          <div className="note">{t('dash.noPositives')}</div>
-        )}
-      </section>
+      <RevealGate revealed={revealed} onReveal={onReveal}>
+        <section className="panel">
+          <div className="panel-title">
+            <h3>{t('dash.headline')}</h3>
+          </div>
+          <Dashboard
+            negativeMeans={scenario.negativeMeans[lang]}
+            model={model}
+            observed={
+              hasRun && mode === 'random'
+                ? { ppv1: observedPpv1(counts), ppv2: observedPpv2(counts) }
+                : null
+            }
+          />
+          {hasRun && mode === 'random' && counts.positive1 === 0 && (
+            <div className="note">{t('dash.noPositives')}</div>
+          )}
+        </section>
+      </RevealGate>
 
       {hasRun && (
         <NegativeAnalysis

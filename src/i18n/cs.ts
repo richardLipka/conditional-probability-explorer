@@ -281,6 +281,11 @@ export const cs: Record<keyof typeof en, string> = {
   'quiz.answer.4':
     'Specificita. Falešně pozitivní pocházejí z obrovské skupiny bez jevu, takže i malá míra falešné pozitivity jich vytvoří mnoho.',
 
+  'reveal.title': 'Nejdřív tipněte',
+  'reveal.body':
+    'Čísla zůstanou skrytá, dokud si netipnete. Omyl si zapamatujete líp než hotovou odpověď.',
+  'reveal.show': 'Stejně ukázat',
+
   'about.title': 'O tomto průzkumníku',
   'about.body':
     'Interaktivní ukázka klamu základní míry: i velmi přesný test může dávat nespolehlivé pozitivní výsledky, pokud je zkoumaný jev vzácný. Vše se počítá přímo v prohlížeči; simulace losuje skutečně náhodné jedince, takže její výsledky kolem teorie kolísají, místo aby jí přesně odpovídaly.',

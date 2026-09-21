@@ -280,6 +280,28 @@ a {
   box-shadow: var(--shadow);
 }
 
+/* Stands in for whatever is waiting on a prediction. Deliberately plain: it
+   should read as "not yet", never as an error. */
+.panel.locked {
+  background: none;
+  border-style: dashed;
+  box-shadow: none;
+  text-align: center;
+  padding: 26px 18px;
+}
+
+.panel.locked h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.panel.locked p {
+  margin: 0 auto 14px;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
 .panel + .panel {
   margin-top: 16px;
 }

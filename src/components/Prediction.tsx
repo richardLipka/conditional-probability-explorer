@@ -17,9 +17,11 @@ export interface PredictionInputProps {
   params: ModelParams;
   guess: number | null;
   onGuess: (value: number | null) => void;
+  /** Skipping counts as deciding not to guess, and unlocks the numbers too. */
+  onSkip?: () => void;
 }
 
-export function PredictionInput({ params, guess, onGuess }: PredictionInputProps) {
+export function PredictionInput({ params, guess, onGuess, onSkip }: PredictionInputProps) {
   const { t, pct } = useI18n();
   const [slider, setSlider] = useState(50);
   const [dismissed, setDismissed] = useState(false);
@@ -30,7 +32,13 @@ export function PredictionInput({ params, guess, onGuess }: PredictionInputProps
     <section className="panel quiz">
       <div className="panel-title">
         <h3>{t('quiz.title')}</h3>
-        <button className="btn small ghost" onClick={() => setDismissed(true)}>
+        <button
+          className="btn small ghost"
+          onClick={() => {
+            setDismissed(true);
+            onSkip?.();
+          }}
+        >
           {t('quiz.skip')}
         </button>
       </div>

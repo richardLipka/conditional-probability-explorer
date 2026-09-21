@@ -276,6 +276,11 @@ export const en = {
   'quiz.answer.4':
     'Specificity. False positives are drawn from the huge group without the condition, so even a small false-positive rate produces many of them.',
 
+  'reveal.title': 'Guess first',
+  'reveal.body':
+    'The numbers stay hidden until you have made a guess. You remember a wrong answer better than a given one.',
+  'reveal.show': 'Show me anyway',
+
   'about.title': 'About this explorer',
   'about.body':
     'An interactive demonstration of the base-rate fallacy: a very accurate test can still make a positive result unreliable when the condition being tested for is rare. Everything is computed in the browser; the simulation draws genuinely random individuals, so its results fluctuate around the theory rather than matching it exactly.',
