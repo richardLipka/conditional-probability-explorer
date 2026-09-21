@@ -15,6 +15,17 @@ import type { Scenario } from '../lib/scenario';
 
 const FREQ_SIZES = [100, 1000, 10000];
 
+/**
+ * The same four silhouettes the legend and the simulation use, so a reader who
+ * cannot separate the colours can still separate the groups.
+ */
+const ICON_SHAPE = {
+  tp: { borderRadius: '50%' },
+  fp: { borderRadius: 2 },
+  fn: { clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' },
+  tn: { clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' },
+} as const;
+
 /** What the table is currently conditioned on. */
 type Given = 'none' | 'pos' | 'neg' | 'cond' | 'nocond';
 
@@ -213,11 +224,11 @@ export function Theory({ params, scenario }: { params: ModelParams; scenario: Sc
               <span
                 key={`${g.k}-${i}`}
                 style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: g.k === 'tp' || g.k === 'fn' ? '50%' : 2,
+                  width: 8,
+                  height: 8,
                   background: g.color,
                   display: 'block',
+                  ...ICON_SHAPE[g.k as keyof typeof ICON_SHAPE],
                 }}
               />
             )),

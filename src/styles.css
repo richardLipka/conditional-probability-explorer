@@ -20,8 +20,8 @@
   --cond: #c084fc; /* condition truly present */
   --nocond: #47527a; /* condition absent */
 
-  --tp: #34d399; /* true positive  */
-  --fp: #fb7185; /* false positive */
+  --tp: #6ee7b7; /* true positive  */
+  --fp: #ef4444; /* false positive */
   --fn: #fbbf24; /* false negative */
   --tn: #5b678f; /* true negative  */
 

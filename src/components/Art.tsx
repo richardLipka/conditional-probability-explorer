@@ -6,8 +6,8 @@ import type { ArtKey } from '../lib/scenario';
 import type { Outcome } from '../lib/types';
 
 export const OUTCOME_COLORS: Record<Outcome | 'cond' | 'nocond' | 'unknown', string> = {
-  truePositive: '#34d399',
-  falsePositive: '#fb7185',
+  truePositive: '#6ee7b7',
+  falsePositive: '#ef4444',
   trueNegative: '#5b678f',
   falseNegative: '#fbbf24',
   cond: '#c084fc',
@@ -77,8 +77,8 @@ export function BrandMark() {
       <rect x="2" y="2" width="44" height="44" rx="13" fill="none" stroke="url(#bm)" opacity="0.6" />
       <circle cx="15" cy="24" r="5" fill="#7c8cff" />
       <path d="M20 24h8" stroke="#5c6ba8" strokeWidth="1.6" />
-      <circle cx="33" cy="15" r="4" fill="#34d399" />
-      <circle cx="33" cy="33" r="4" fill="#fb7185" />
+      <circle cx="33" cy="15" r="4" fill="#6ee7b7" />
+      <circle cx="33" cy="33" r="4" fill="#ef4444" />
       <path d="M28 24 33 15M28 24 33 33" stroke="#5c6ba8" strokeWidth="1.6" fill="none" />
     </svg>
   );
@@ -123,9 +123,9 @@ export function ScenarioArt({ art, className = 'intro-art' }: { art: ArtKey; cla
         <svg className={className} viewBox="0 0 132 92" aria-hidden="true">
           <rect x="14" y="24" width="104" height="54" rx="8" fill="#1a2246" stroke="#33406c" />
           <path d="M14 40h104" stroke="#33406c" />
-          <circle cx="24" cy="32" r="3" fill="#fb7185" />
+          <circle cx="24" cy="32" r="3" fill="#ef4444" />
           <circle cx="34" cy="32" r="3" fill="#fbbf24" />
-          <circle cx="44" cy="32" r="3" fill="#34d399" />
+          <circle cx="44" cy="32" r="3" fill="#6ee7b7" />
           <path
             d="M24 62h14l6-12 8 24 7-16 5 8h44"
             fill="none"
@@ -148,7 +148,7 @@ export function ScenarioArt({ art, className = 'intro-art' }: { art: ArtKey; cla
           <circle cx="38" cy="70" r="7" fill="#131a35" stroke="#4b5786" strokeWidth="2.5" />
           <circle cx="70" cy="70" r="7" fill="#131a35" stroke="#4b5786" strokeWidth="2.5" />
           <rect x="94" y="30" width="26" height="10" rx="4" fill="#1a2246" stroke="#3d4a86" />
-          <circle cx="101" cy="35" r="3.2" fill="#fb7185">
+          <circle cx="101" cy="35" r="3.2" fill="#ef4444">
             <animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite" />
           </circle>
           <circle cx="113" cy="35" r="3.2" fill="#60a5fa">
@@ -201,14 +201,14 @@ export function ScenarioArt({ art, className = 'intro-art' }: { art: ArtKey; cla
           {/* travellers, one flagged */}
           {[22, 34, 66, 96, 110].map((x, i) => (
             <g key={x}>
-              <circle cx={x} cy={52} r="4" fill={i === 2 ? '#fb7185' : '#3b4670'} />
+              <circle cx={x} cy={52} r="4" fill={i === 2 ? '#ef4444' : '#3b4670'} />
               <path
                 d={`M${x - 5} 62 q5 -7 10 0`}
-                fill={i === 2 ? '#fb7185' : '#2c3560'}
+                fill={i === 2 ? '#ef4444' : '#2c3560'}
               />
             </g>
           ))}
-          <rect x="56" y="68" width="20" height="4" rx="2" fill="#fb7185" opacity="0.7" />
+          <rect x="56" y="68" width="20" height="4" rx="2" fill="#ef4444" opacity="0.7" />
         </svg>
       );
     case 'lazy':

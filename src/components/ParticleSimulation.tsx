@@ -32,6 +32,51 @@ const COND = 4;
 const NOCOND = 5;
 const UNKNOWN = 6;
 
+type Draw = (ctx: CanvasRenderingContext2D, x: number, y: number, r: number) => void;
+
+/**
+ * One silhouette per outcome, the same four the legend uses, so the picture
+ * survives colour blindness.
+ *
+ * Every glyph has to stay inside the packer's cell. The packer spaces people
+ * `2r` apart, so anything reaching past `r` runs into its neighbour, and a
+ * field of overlapping glyphs reads as a solid sheet with holes in it rather
+ * than as individuals — the exact opposite of the point. A triangle and a
+ * diamond inscribed in that circle carry less ink than a disc does; that is
+ * geometry, and losing a little weight beats losing the shape.
+ */
+const EXTENT = 0.95;
+const DISC: Draw = (ctx, x, y, r) => {
+  const d = r * EXTENT;
+  ctx.moveTo(x + d, y);
+  ctx.arc(x, y, d, 0, Math.PI * 2);
+};
+const BLOCK: Draw = (ctx, x, y, r) => ctx.rect(x - r, y - r, r * 2, r * 2);
+const SQUARE: Draw = (ctx, x, y, r) => {
+  const h = r * EXTENT * 0.84;
+  ctx.rect(x - h, y - h, h * 2, h * 2);
+};
+const TRIANGLE: Draw = (ctx, x, y, r) => {
+  const d = r * EXTENT;
+  ctx.moveTo(x, y - d);
+  ctx.lineTo(x + d, y + d * 0.66);
+  ctx.lineTo(x - d, y + d * 0.66);
+  ctx.closePath();
+};
+const DIAMOND: Draw = (ctx, x, y, r) => {
+  const d = r * EXTENT;
+  ctx.moveTo(x, y - d);
+  ctx.lineTo(x + d, y);
+  ctx.lineTo(x, y + d);
+  ctx.lineTo(x - d, y);
+  ctx.closePath();
+};
+/** Indexed by the colour constants above. */
+const GLYPH: Draw[] = [DISC, SQUARE, TRIANGLE, DIAMOND, DISC, DISC, DISC];
+
+/** Below this radius a silhouette is a smudge and the palette carries it alone. */
+const SHAPED_MIN_RADIUS = 3;
+
 interface Box {
   x: number;
   y: number;
@@ -427,7 +472,7 @@ export function ParticleSimulation({
       frame(s.posBox, labels.positive1, labels.fmt(s.counts.positive1), '#c084fc', past('test1'));
       frame(s.negBox, labels.negative1, labels.fmt(s.counts.negative1), '#5b678f', past('test1'));
       if (confirmatory) {
-        frame(s.bothBox, labels.positiveBoth, labels.fmt(s.counts.positive2), '#34d399', past('test2'));
+        frame(s.bothBox, labels.positiveBoth, labels.fmt(s.counts.positive2), OUTCOME_COLORS.truePositive, past('test2'));
         frame(s.clearedBox, labels.cleared, labels.fmt(s.counts.negative2), '#8b93b5', past('test2'));
       }
 
@@ -475,18 +520,17 @@ export function ParticleSimulation({
       const r = Math.max(1, radius);
       const faded = focus > 0 && focus < 1;
       const round = r >= 2.6;
+      const shaped = r >= SHAPED_MIN_RADIUS;
       for (let c = 0; c < COLORS.length; c++) {
         ctx.beginPath();
         let any = false;
+        // One path, one fill, per colour — so giving each outcome its own
+        // silhouette costs nothing beyond picking the emitter up front.
+        const glyph = shaped ? GLYPH[c] : round ? DISC : BLOCK;
         for (let k = 0; k < n; k++) {
           if (col[k] !== c) continue;
           any = true;
-          if (round) {
-            ctx.moveTo(xs[k] + r, ys[k]);
-            ctx.arc(xs[k], ys[k], r, 0, Math.PI * 2);
-          } else {
-            ctx.rect(xs[k] - r, ys[k] - r, r * 2, r * 2);
-          }
+          glyph(ctx, xs[k], ys[k], r);
         }
         if (!any) continue;
         ctx.fillStyle = COLORS[c];
@@ -494,13 +538,16 @@ export function ParticleSimulation({
         ctx.fill();
       }
       // Anyone conditioned away is redrawn faded on top of their own colour.
+      // The hole that erases someone conditioned away has to cover whichever
+      // glyph they were drawn with, and no glyph reaches past r.
+      const punch = r * 1.15;
       if (faded) {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
         for (let k = 0; k < n; k++) {
           if (alpha[k] >= 1) continue;
           ctx.moveTo(xs[k] + r, ys[k]);
-          ctx.arc(xs[k], ys[k], r * 1.15, 0, globalThis.Math.PI * 2);
+          ctx.arc(xs[k], ys[k], punch, 0, globalThis.Math.PI * 2);
         }
         ctx.globalAlpha = easeInOut(focus);
         ctx.fill();
@@ -511,7 +558,7 @@ export function ParticleSimulation({
         for (let k = 0; k < n; k++) {
           if (s.kind1[k] === TP || s.kind1[k] === FP) continue;
           ctx.moveTo(xs[k] + r, ys[k]);
-          ctx.arc(xs[k], ys[k], r * 1.15, 0, globalThis.Math.PI * 2);
+          ctx.arc(xs[k], ys[k], punch, 0, globalThis.Math.PI * 2);
         }
         ctx.globalAlpha = 1;
         ctx.fill();

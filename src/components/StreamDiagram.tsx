@@ -480,7 +480,7 @@ export function StreamDiagram({
                 <rect x={xa.n1} y={g.tFN} width={xa.n2 - xa.n1} height={g.hFN} fill={OUTCOME_COLORS.falseNegative} opacity="0.55" />
                 <rect x={xa.n1} y={g.tTN} width={xa.n2 - xa.n1} height={g.hTN} fill={OUTCOME_COLORS.trueNegative} opacity="0.55" />
 
-                {nodeLabel(xa.n2 + 10, A.top + 4, t('flow.positiveBoth'), n(c.positive2, decimals), '#34d399')}
+                {nodeLabel(xa.n2 + 10, A.top + 4, t('flow.positiveBoth'), n(c.positive2, decimals), OUTCOME_COLORS.truePositive)}
                 {nodeLabel(
                   xa.n2 + 10,
                   A.top + g.hBoth + g.gap2 + 4,
@@ -612,7 +612,7 @@ export function StreamDiagram({
                     B.top + 4,
                     t('flow.positiveBoth'),
                     `${n(c.positive2, decimals)} · ${share(c.positive2, c.positive1)}`,
-                    '#34d399',
+                    OUTCOME_COLORS.truePositive,
                   )}
                   {nodeLabel(
                     xb.n1 + 12,
