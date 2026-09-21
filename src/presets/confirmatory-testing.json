@@ -32,7 +32,7 @@
   "outcomes": {
     "truePositive": {
       "en": "Confirmed by both tests. Two independent positives make this very likely to be real.",
-      "cs": "Potvrzeno oběma testy. Dva nezávislé pozitivní výsledky činí tento případ velmi pravděpodobně skutečným."
+      "cs": "Potvrzeno oběma testy. Po dvou nezávislých pozitivních výsledcích jde velmi pravděpodobně o skutečný případ."
     },
     "falsePositive": {
       "en": "Wrong twice over. Rare, because the laboratory test almost never produces a false positive of its own.",

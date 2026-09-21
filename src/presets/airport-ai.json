@@ -40,7 +40,7 @@
     },
     "trueNegative": {
       "en": "An ordinary traveller correctly ignored. Practically the whole airport ends up here, which is why even a tiny false-alarm rate produces so many stops.",
-      "cs": "Běžný cestující správně přehlédnutý. Sem patří prakticky celé letiště, a proto i nepatrná míra falešných poplachů vyrobí tolik zadržení."
+      "cs": "Běžný cestující, kterého systém správně nechal projít. Sem patří prakticky celé letiště, a proto i nepatrná míra falešných poplachů vyrobí tolik zadržení."
     },
     "falseNegative": {
       "en": "Genuinely involved and not flagged. Turning the alert rate up to catch these people would multiply the innocent ones stopped.",

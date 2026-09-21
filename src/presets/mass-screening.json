@@ -7,7 +7,7 @@
   },
   "description": {
     "en": "A whole city is screened for a condition that affects 1 person in 2,000, using a test that is good but not excellent. The false positives arrive by the hundred.",
-    "cs": "Celé město je testováno na stav, který postihuje 1 člověka z 2000, testem, který je dobrý, ale ne vynikající. Falešně pozitivních přijdou stovky."
+    "cs": "Celé město je testováno na stav, který postihuje 1 člověka z 2000, testem, který je dobrý, ale ne vynikající. Falešně pozitivních výsledků budou stovky."
   },
   "question": {
     "en": "You were flagged by the screening programme. How likely is it that you have the condition?",
@@ -44,7 +44,7 @@
     },
     "falseNegative": {
       "en": "Has the condition but the programme never contacts them.",
-      "cs": "Daný stav má, ale program jej nikdy nekontaktuje."
+      "cs": "Stav má, ale program se mu nikdy neozve."
     }
   },
   "params": {

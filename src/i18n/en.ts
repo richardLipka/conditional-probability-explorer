@@ -135,16 +135,16 @@ export const en = {
   'neg.oneIn': '1 in {n}',
   'neg.none': 'none',
   'neg.ledger': 'Of the {n} people who really have the condition',
-  'neg.ledger.found': '{n} are positive on both tests and get found',
-  'neg.ledger.missed1': '{n} were missed by test 1 and never retested',
-  'neg.ledger.missed2': '{n} were caught by test 1 and then cleared by test 2',
+  'neg.ledger.found': 'Positive on both tests, and found: {n}',
+  'neg.ledger.missed1': 'Missed by test 1 and never retested: {n}',
+  'neg.ledger.missed2': 'Caught by test 1, then cleared by test 2: {n}',
   'neg.ledger.cost': 'These are the price of confirming.',
   'neg.chain': 'Chain sensitivity',
   'neg.chain.hint': 'Share of real cases that survive both tests',
   'dash.accuracy': 'Overall accuracy',
   'dash.accuracy.hint': 'How often the test is right about anyone',
   'dash.accuracy.trap':
-    'Accuracy is high because almost nobody has the condition and the test says so correctly. True negatives carry the whole number. It tells you nothing about what a positive result is worth.',
+    'Accuracy is high because almost nobody has the condition and the test says so correctly. It rests almost entirely on true negatives. It says nothing about what a positive result means.',
   'dash.negative.stage': 'After a negative result',
   'dash.negative.headline': 'Probability the condition is absent',
   'dash.negative.given': 'given one negative result',
@@ -154,7 +154,7 @@ export const en = {
   'dash.negative.oneIn': 'About 1 missed case in every {n} negative results.',
   'dash.negative.perfect': 'At these settings a negative result is never wrong.',
   'dash.negative.insight':
-    'When the condition is rare, the negative result is the trustworthy one. Almost everybody who tests negative really is clear. Positives are what need care.',
+    'When the condition is rare, the negative result is the trustworthy one. Almost everybody who tests negative really is clear. The positives are the ones that have to be checked.',
   'dash.negative.insightCommon':
     'The condition is common enough that a negative result still leaves a real chance of a missed case.',
   'dash.neverPositive': 'This test never says positive. There is nothing here to interpret.',
@@ -178,7 +178,7 @@ export const en = {
     'At {pop} people, nobody tested positive in {n} of {runs} runs. No positives, nothing to work out.',
   'repeat.axis': 'Probability the condition is present, given a positive result',
   'repeat.insight':
-    'A rare condition is hard to find and hard to measure, and it is the same reason both times: almost nobody has it. Ten real cases carry the whole estimate. Ten is not many.',
+    'A rare condition is hard to find and hard to measure, and it is the same reason both times: almost nobody has it. A handful of real cases carries the whole estimate. A handful is not much to build on.',
 
   'export.tree': 'Probability tree',
   'export.curve': 'PPV against prevalence',
@@ -296,7 +296,7 @@ export const en = {
   'quiz.answer.2':
     '1 % of a huge healthy group easily outnumbers 99 % of a tiny affected one.',
   'quiz.answer.3':
-    'It multiplies the odds by the second test’s likelihood ratio, which can lift a 9% posterior above 90%.',
+    'It multiplies the odds by the second test’s likelihood ratio, which can lift a 9 % answer above 90 %.',
   'quiz.answer.4':
     'Specificity. False positives are drawn from the huge group without the condition, so even a small false-positive rate produces many of them.',
 

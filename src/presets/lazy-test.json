@@ -39,8 +39,8 @@
       "cs": "Také nikdy nenastane — a právě proto vypadá přesnost tak působivě."
     },
     "trueNegative": {
-      "en": "Correct, and it took no skill whatsoever. These alone carry the 99.9 % accuracy figure.",
-      "cs": "Správně, a nebylo k tomu potřeba vůbec nic. Právě tyto případy nesou celou přesnost 99,9 %."
+      "en": "Correct, and it took no skill whatsoever. The 99.9 % accuracy figure rests entirely on these.",
+      "cs": "Správně, a nebylo k tomu potřeba vůbec nic. Právě na nich celá přesnost 99,9 % stojí."
     },
     "falseNegative": {
       "en": "Every single real case is missed. Sensitivity is zero, so the test is useless for the one job it was meant to do.",

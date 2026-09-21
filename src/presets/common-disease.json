@@ -36,7 +36,7 @@
     },
     "falsePositive": {
       "en": "Healthy but flagged. Still happens at the same rate as before — there are simply fewer healthy people to draw them from.",
-      "cs": "Zdravý, ale označený. Děje se to stále stejně často — jen je zdravých lidí méně, ze kterých mohou vzniknout."
+      "cs": "Zdravý, ale označený. Děje se to stále stejně často — jen je méně zdravých lidí, ze kterých by takový výsledek mohl vzejít."
     },
     "trueNegative": {
       "en": "Healthy and correctly cleared.",
@@ -44,7 +44,7 @@
     },
     "falseNegative": {
       "en": "Ill but missed. With 1,000 ill people in the population, a 99 % sensitive test still misses about 10 of them.",
-      "cs": "Nemocný, ale přehlédnutý. Při 1000 nemocných test se senzitivitou 99 % stále asi 10 z nich mine."
+      "cs": "Nemocný, ale přehlédnutý. Při 1000 nemocných jich test se senzitivitou 99 % asi 10 přehlédne."
     }
   },
   "params": {

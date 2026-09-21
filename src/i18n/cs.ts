@@ -40,7 +40,7 @@ export const cs: Record<keyof typeof en, string> = {
   'controls.sensitivity': 'Senzitivita',
   'controls.sensitivity.hint': 'Jak často test zachytí skutečný případ.',
   'controls.specificity': 'Specificita',
-  'controls.specificity.hint': 'Jak často propustí toho, komu nic není.',
+  'controls.specificity.hint': 'Jak často test řekne negativní tomu, kdo jev nemá.',
   'controls.confirmatory': 'Potvrzovací druhý test',
   'controls.confirmatory.hint': 'Znovu otestovat pouze ty, kdo byli pozitivní v testu 1',
   'controls.preset.export': 'Exportovat JSON',
@@ -66,7 +66,7 @@ export const cs: Record<keyof typeof en, string> = {
   'sim.stage.idle': 'Připraveno — stiskněte Spustit simulaci',
   'sim.stage.population': 'Generuji populaci',
   'sim.stage.condition': 'Přiřazuji skutečný stav podle prevalence',
-  'sim.stage.test1': 'Testuji test 1 na všech',
+  'sim.stage.test1': 'Spouštím test 1 na všech',
   'sim.stage.split1': 'Rozděluji pozitivní a negativní výsledky',
   'sim.stage.test2': 'Přetestovávám pouze pozitivní',
   'sim.stage.done': 'Hotovo — všichni jsou roztříděni',
@@ -139,16 +139,16 @@ export const cs: Record<keyof typeof en, string> = {
   'neg.oneIn': '1 z {n}',
   'neg.none': 'žádný',
   'neg.ledger': 'Z {n} lidí, kteří jev skutečně mají',
-  'neg.ledger.found': '{n} je pozitivních v obou testech a bude nalezeno',
-  'neg.ledger.missed1': '{n} přehlédl test 1 a už nebyli znovu testováni',
-  'neg.ledger.missed2': '{n} zachytil test 1 a poté je test 2 vyloučil',
+  'neg.ledger.found': 'Pozitivních v obou testech, a tedy nalezených: {n}',
+  'neg.ledger.missed1': 'Přehlédnutých testem 1 a už znovu netestovaných: {n}',
+  'neg.ledger.missed2': 'Zachycených testem 1 a poté vyloučených testem 2: {n}',
   'neg.ledger.cost': 'To je cena za potvrzování.',
   'neg.chain': 'Senzitivita řetězce',
   'neg.chain.hint': 'Podíl skutečných případů, které projdou oběma testy',
   'dash.accuracy': 'Celková přesnost',
   'dash.accuracy.hint': 'Jak často test odpoví správně u kohokoli',
   'dash.accuracy.trap':
-    'Přesnost je vysoká proto, že jev nemá skoro nikdo a test to správně říká. Celé číslo nesou správně negativní. O ceně pozitivního výsledku neříká nic.',
+    'Přesnost je vysoká proto, že jev nemá skoro nikdo a test to správně říká. Stojí skoro celá na správně negativních výsledcích. O tom, co znamená pozitivní výsledek, neříká nic.',
   'dash.negative.stage': 'Po negativním výsledku',
   'dash.negative.headline': 'Pravděpodobnost, že jev nenastal',
   'dash.negative.given': 'při jednom negativním výsledku',
@@ -158,7 +158,7 @@ export const cs: Record<keyof typeof en, string> = {
   'dash.negative.oneIn': 'Zhruba 1 přehlédnutý případ na každých {n} negativních výsledků.',
   'dash.negative.perfect': 'Při tomto nastavení není negativní výsledek nikdy chybný.',
   'dash.negative.insight':
-    'Když je jev vzácný, důvěryhodný je právě negativní výsledek. Skoro každý, komu vyjde negativně, jev opravdu nemá. Opatrnost si žádají pozitivní výsledky.',
+    'Když je jev vzácný, důvěryhodný je právě negativní výsledek. Skoro každý, komu vyjde negativně, jev opravdu nemá. Ověřovat se musí ty pozitivní.',
   'dash.negative.insightCommon':
     'Jev je natolik častý, že u negativního výsledku zůstává reálná šance na přehlédnutý případ.',
   'dash.neverPositive': 'Tento test nikdy neřekne pozitivní. Není co vykládat.',
@@ -182,15 +182,15 @@ export const cs: Record<keyof typeof en, string> = {
     'Běhů bez jediného pozitivního výsledku při {pop} lidech: {n} ze {runs}. Žádní pozitivní, není co počítat.',
   'repeat.axis': 'Pravděpodobnost, že jev nastal, při pozitivním výsledku',
   'repeat.insight':
-    'Vzácný jev se těžko odhaluje i těžko měří a je to pokaždé ze stejného důvodu: skoro nikdo ho nemá. Celý odhad stojí na deseti skutečných případech. Deset není moc.',
+    'Vzácný jev se těžko odhaluje i těžko měří a je to pokaždé ze stejného důvodu: skoro nikdo ho nemá. Celý odhad stojí na hrstce skutečných případů. Na hrstce se staví špatně.',
 
   'export.tree': 'Pravděpodobnostní strom',
-  'export.curve': 'PPV podle prevalence',
+  'export.curve': 'PPV v závislosti na prevalenci',
   'export.params.curve':
     'Test 1 senzitivita {se} / specificita {sp} · prevalence běží po vodorovné ose',
   'export.credit': 'Průzkumník podmíněné pravděpodobnosti',
   'dash.insight.rare':
-    'Jev je vzácný. Většina pozitivních výsledků vzejde z obrovské skupiny zdravých, takže strop odpovědi určuje specificita. Senzitivita s ní skoro nehne.',
+    'Jev je vzácný. Většina pozitivních výsledků vzejde z obrovské skupiny zdravých, takže strop odpovědi určuje specificita. Senzitivita s odpovědí skoro nehne.',
   'dash.insight.common':
     'Jev je natolik častý, že pozitivní výsledek je sám o sobě už silným důkazem.',
   'dash.insight.confirm':
@@ -218,7 +218,7 @@ export const cs: Record<keyof typeof en, string> = {
     'Další podmíněná pravděpodobnost, a být v této skupině je mnohem horší než mezi negativními v testu 1. Tady už byl každý jednou označen.',
   'theory.chain.lr2eff': 'Efektivní LR+ testu 2',
   'theory.dependence.active':
-    'Tyto dva testy nejsou nezávislé. V {rho} případů test 2 jen zopakuje test 1, takže jeho věrohodnostní poměr klesá k 1 a potvrzení vám koupí méně.',
+    'Tyto dva testy nejsou nezávislé. V {rho} případů test 2 jen zopakuje test 1, takže jeho věrohodnostní poměr klesá k 1 a z potvrzení toho tolik nezískáte.',
   'theory.refclass': 'Pravděpodobnost o skupině, nikoli o vás',
   'theory.refclass.body':
     'Ze všech, komu vyjde pozitivní výsledek, jev skutečně má {ppv}. Neříká to, že konkrétní člověk je z {ppv} nemocný. Nikdo není zlomkem případu. To číslo popisuje referenční skupinu, do níž shodou okolností patříte.',
@@ -232,7 +232,7 @@ export const cs: Record<keyof typeof en, string> = {
   'theory.flow': 'Celý tok při očekávaných hodnotách',
   'theory.flow.hint': 'Šířky odpovídají počtu lidí, spočteno, nikoli losováno',
   'theory.chain': 'Řetězení dvou testů',
-  'theory.chain.hint': 'Každý pozitivní výsledek násobí šanci. Druhý test navazuje tam, kde první skončil.',
+  'theory.chain.hint': 'Každý pozitivní výsledek násobí šanci (odds), ne pravděpodobnost. Druhý test navazuje tam, kde první skončil.',
   'theory.chain.prior': 'Před testováním',
   'theory.chain.after1': 'Po jednom pozitivním',
   'theory.chain.after2': 'Po dvou pozitivních',
@@ -301,9 +301,9 @@ export const cs: Record<keyof typeof en, string> = {
   'quiz.answer.2':
     '1 % z obrovské skupiny zdravých snadno převýší 99 % z nepatrné skupiny nemocných.',
   'quiz.answer.3':
-    'Vynásobí šanci věrohodnostním poměrem druhého testu, což může posunout 9% pravděpodobnost nad 90 %.',
+    'Vynásobí šanci (odds) věrohodnostním poměrem druhého testu. Z 9% pravděpodobnosti se tak může stát přes 90 %.',
   'quiz.answer.4':
-    'Specificita. Falešně pozitivní pocházejí z obrovské skupiny bez jevu, takže i malá míra falešné pozitivity jich vytvoří mnoho.',
+    'Specificita. Falešně pozitivní výsledky pocházejí z obrovské skupiny bez jevu, takže i malá míra falešné pozitivity jich vytvoří mnoho.',
 
   'reveal.title': 'Nejdřív tipněte',
   'reveal.body':
